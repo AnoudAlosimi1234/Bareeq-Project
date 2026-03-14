@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تعديل الشروط والأحكام</title>
+
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<!-- الجزء العلوي -->
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<h1>تعديل الشروط والأحكام</h1>
+
+<div class="terms-box" id="termsBox" contenteditable="false">
+مرحباً بك في تطبيق بريق. باستخدامك للتطبيق، فإنك توافق على جميع الشروط والأحكام التالية:<br><br>
+
+1. يلتزم المستخدم باستخدام التطبيق للأغراض التعليمية فقط، وعدم إساءة الاستخدام أو محاولة إتلاف المحتوى أو الأنشطة المتوفرة.<br>
+2. لا يجوز نسخ أو إعادة توزيع أي جزء من محتوى التطبيق دون إذن رسمي.<br>
+3. يتعهد المستخدم بالحفاظ على سرية بيانات حسابه وعدم مشاركتها مع أي طرف آخر.<br><br>
+
+باستخدامك للتطبيق، فإنك تقر بأنك قد قرأت هذه الشروط وفهمتها ووافقت عليها.
+</div>
+
+<div style="text-align:center;">
+    <button class="btn" onclick="enableEdit()">تعديل</button><br><br>
+    <button class="btn" onclick="openDelete()">حذف</button>
+    <button class="btn" onclick="saveEdit()">حفظ التعديلات</button>
+</div>
+
+<!-- الحذف -->
+<div id="mainModal" class="modal">
+    <div class="modal-content" id="modalContent"></div>
+</div>
+<script>
+function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+closeModal();    }
+});
+
+function enableEdit(){ // تفعيل التحرير
+    document.getElementById("termsBox").contentEditable = "true";
+}
+
+function saveEdit(){ 
+    document.getElementById("termsBox").contentEditable = "false";
+    alert(" حفظت التعديلات ");
+}
+
+function openModal(){
+    document.getElementById("mainModal").style.display = "flex";
+}
+
+function closeModal(){
+    document.getElementById("mainModal").style.display = "none";
+}
+
+function openDelete(){
+
+    document.getElementById("modalContent").innerHTML = `
+
+        <h3>أتأكد من الحذف؟</h3>
+
+        <div class="modal-buttons">
+            <button class="cancel modal-button" onclick="closeModal()">لا</button>
+            <button class="confirm modal-button" onclick="deleteTerms()">نعم</button>
+        </div>
+
+    `;
+
+    openModal();
+}
+
+function deleteTerms(){
+    document.getElementById("termsBox").innerHTML = "";
+    closeModal();
+}
+</script>
+
+</body>
+</html>

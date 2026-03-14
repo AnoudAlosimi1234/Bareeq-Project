@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>النشاطات</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="activities-page">
+
+<header role="banner">
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="assets/images/logo2.png" alt="شعار بريق" class="logo-img">
+    </div>
+
+    <h1 class="welcome">أهلاً وسهلاً!</h1>
+
+
+</header>
+
+<main role="main">
+
+    <section class="yellow-area">
+
+        <h2 class="section-title">إليك نشاطاتك</h2>
+
+        <!-- Activities -->
+        <div class="activities">
+
+            <button class="activity-card" onclick="goToReading()" aria-label="الانتقال إلى نشاط القراءة">
+                <div class="activity-icon">📚</div>
+                <div class="activity-text">القراءة</div>
+            </button>
+
+            <button class="activity-card" onclick="goToWriting()" aria-label="الانتقال إلى نشاط الكتابة">
+                <div class="activity-icon">✏️</div>
+                <div class="activity-text">الكتابة</div>
+            </button>
+
+        </div>
+
+        <!-- Girl + Points -->
+        <div class="progress-section">
+
+            <div class="girl">
+                <img src="assets/images/A girl-main activity.png" alt="طفلة تكتب في دفتر">
+            </div>
+
+            <div class="points-box" aria-live="polite">
+                ⭐ 1320<br>نقاطي
+            </div>
+
+        </div>
+
+        <!-- Bottom Button -->
+        <div class="buttons">
+            <button class="btn yellow" onclick="weeklyReport()">التقرير الأسبوعي</button>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    
+// التنقل بين الصفحات
+function weeklyReport(){
+    window.location.href="weeklyReport.html";
+}
+function goToReading(){
+    window.location.href="Reading.html";
+}
+function goToWriting(){
+    window.location.href="Writing.html";
+}
+
+// دالة النطق
+function speak(text){
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "ar-SA";
+    msg.rate = 0.85;
+    msg.pitch = 1.1;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+// نطق تلقائي عند تحميل الصفحة
+window.addEventListener("load", () => {
+    speak("أهلاً وسهلاً! إليك نشاطاتك. يمكنك الضغط على القراءة أو الكتابة للبدء. وتفقد نقاطك والتقرير الأسبوعي.");
+});
+
+// قراءة أي عنصر عند مرور الماوس
+document.querySelectorAll(".activities-page h1, .activities-page h2, .activities-page .activity-text, .activities-page .btn, .activities-page .points-box")
+.forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        const text = el.innerText.trim();
+        if(text !== ""){
+            speak(text);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

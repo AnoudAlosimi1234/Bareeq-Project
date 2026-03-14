@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراحل المستوى المتوسط (كتابة)</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="medium-writing-page">
+
+<header class="header">
+    <button class="back" aria-label="العودة إلى صفحة المستويات" onclick="goBack()">←</button>
+    <div class="logo">
+        <img src="assets/images/logo.png" alt="شعار بريق" class="logo-img">
+    </div>
+    <div class="cloud cloud1">☁️</div>
+    <div class="cloud cloud2">☁️</div>
+    <div class="sun">🌞</div>
+    <h1 class="page-title">الكتابة</h1>
+</header>
+
+<main id="main">
+    <h2 class="level-title">المستوى المتوسط - الكلمات</h2>
+
+    <div class="grid" role="group" aria-label="مستويات التمرين">
+    <script>
+    for(let i=1;i<=28;i++){
+        document.write(`<button class="level-btn ${i<=3?'done':''} ${i==4?'active':''}"
+        ${i==4?'onclick="goToExercise()"':''}
+        aria-label="المستوى ${i}">
+        ${i}
+        </button>`);
+    }
+    </script>
+</div>
+
+<div class="buttons">
+    <button class="btn primary" onclick="goToExercise()">اذهب للتمرين الحالي</button>
+    <button class="btn secondary" onclick="goBack()">العودة إلى الشاشة الرئيسية</button>
+</div>
+
+<button class="words btn" onclick="goToWords()">كلماتي</button>
+
+<div class="girl">
+    <img src="assets/images/A girl-writing2.png" alt="طفلة تقرأ كتاباً">
+</div>
+
+<script>
+// ===============================
+// التنقل بين الصفحات
+// ===============================
+function goBack(){ window.location.href="Writing.html"; }
+function goToExercise(){ window.location.href="Writing3.html"; }
+function goToWords(){ window.location.href="customWords.html"; }
+
+// ===============================
+// قراءة المحتوى صوتياً عند المرور بالماوس
+// ===============================
+const synth = window.speechSynthesis;
+
+function speakText(text){
+    if(synth.speaking) synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ar-SA';
+    synth.speak(utterance);
+}
+
+// إضافة الاستماع للـ hover على العناصر المهمة
+document.querySelectorAll('h1, h2, button, img').forEach(el=>{
+    el.addEventListener('mouseenter', ()=>{
+        let text = el.tagName === 'IMG' ? el.alt : el.textContent;
+        speakText(text);
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>إدارة حسابات المستخدمين</title>
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+
+<main class="page">
+
+<h2 class="page-title">إدارة المستخدمين</h2>
+
+<div class="search-box">
+    <input type="text" placeholder="البحث عن اسم الطفل">
+    <span class="icon">✏️</span>
+</div>
+
+<div class="table-container">
+
+    <div class="table-header">
+        <span>الصورة</span>
+        <span>الاسم</span>
+        <span>نوع الصعوبات</span>
+        <span>الحالة</span>
+    </div>
+
+    <div id="userRows">
+
+        <!-- صف 1 -->
+        <div class="row">
+            <img class="avatar" src="avatar2.png" onclick="openPicker(this)" alt="افتار ولد">
+            <span>محمد</span>
+            <span>كتابة</span>
+            <span><span class="status red"></span> غير نشط</span>
+
+            <div class="avatar-picker">
+                <img class="avatar-option" src="avatar2.png" onclick="changeAvatar(this)">
+                <img class="avatar-option" src="girl avatar.png" onclick="changeAvatar(this)">
+                <img class="avatar-option" src="girl2 avatar.png" onclick="changeAvatar(this)">
+            </div>
+        </div>
+
+        <!-- صف 2 -->
+        <div class="row">
+            <img class="avatar" src="girl avatar.png" onclick="openPicker(this)" alt="افتار بنت">
+            <span>تالا</span>
+            <span>قراءة</span>
+            <span><span class="status green"></span> نشط</span>
+
+            <div class="avatar-picker">
+                <img class="avatar-option" src="avatar2.png" onclick="changeAvatar(this)">
+                <img class="avatar-option" src="girl avatar.png" onclick="changeAvatar(this)">
+                <img class="avatar-option" src="girl2 avatar.png" onclick="changeAvatar(this)">
+            </div>
+        </div>
+
+        <!-- صف 3 -->
+        <div class="row">
+            <img class="avatar" src="avatar2.png" onclick="openPicker(this)" alt="افتار ولد">
+            <span>سعود</span>
+            <span>قراءة وكتابة</span>
+            <span><span class="status green"></span> نشط</span>
+
+            <div class="avatar-picker">
+                <img class="avatar-option" src="avatar2.png" onclick="changeAvatar(this)">
+                <img class="avatar-option" src="girl avatar.png" onclick="changeAvatar(this)">
+                <img class="avatar-option" src="girl2 avatar.png" onclick="changeAvatar(this)">
+            </div>
+        </div>
+
+    </div>
+
+    <button class="add-btn" onclick="addNewUser()">➕ مستخدم جديد</button>
+
+</div>
+
+</main>
+<script>
+function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+        closeDelete(); 
+    }
+});
+let currentAvatar = null;
+
+// فتح قائمة الافتارات
+function openPicker(img){
+    document.querySelectorAll('.avatar-picker').forEach(p => p.style.display = "none");
+    currentAvatar = img;
+    const picker = img.parentElement.querySelector('.avatar-picker');
+    picker.style.display = "grid";
+}
+
+// تغيير الصورة
+function changeAvatar(option){
+    currentAvatar.src = option.src;
+    option.parentElement.style.display = "none";
+}
+
+// إغلاق اللوحة عند الضغط خارجها
+document.addEventListener("click", function(e){
+    if(!e.target.closest(".avatar-picker") && !e.target.closest(".avatar")){
+        document.querySelectorAll(".avatar-picker").forEach(p => p.style.display = "none");
+    }
+});
+
+// إضافة مستخدم جديد
+function addNewUser() {
+    const container = document.getElementById("userRows");
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    row.innerHTML = `
+        <img class="avatar" src="avatar2.png" onclick="openPicker(this)">
+
+        <input class="input-field" type="text" placeholder="اكتب الاسم">
+
+        <select class="input-field">
+            <option>قراءة</option>
+            <option>كتابة</option>
+            <option>قراءة وكتابة</option>
+        </select>
+
+        <select class="input-field">
+            <option value="green">نشط</option>
+            <option value="red">غير نشط</option>
+        </select>
+
+        <div class="avatar-picker">
+            <img class="avatar-option" src="avatar2.png" onclick="changeAvatar(this)">
+            <img class="avatar-option" src="girl avatar.png" onclick="changeAvatar(this)">
+            <img class="avatar-option" src="girl2 avatar.png" onclick="changeAvatar(this)">
+        </div>
+    `;
+
+    container.appendChild(row);
+}
+
+// البحث
+const searchInput = document.querySelector(".search-box input");
+const rows = document.querySelectorAll("#userRows .row");
+
+searchInput.addEventListener("keyup", function () {
+    const text = this.value.trim();
+
+    rows.forEach(row => {
+        const name = row.querySelector("span:nth-child(2)").textContent;
+
+        if (name.includes(text) || text === "") {
+            row.style.display = "grid";
+        } else {
+            row.style.display = "none";
+        }
+    });
+});
+
+</script>
+</body>
+</html>
+
+

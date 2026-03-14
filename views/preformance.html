@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أداء الطفل - بريق</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="page page-performance">
+
+    <!-- Decorative Elements -->
+    <div class="decor-sun" aria-hidden="true">🌞</div>
+    <div class="decor-cloud decor-cloud--left" aria-hidden="true">☁️</div>
+    <div class="decor-cloud decor-cloud--right" aria-hidden="true">☁️</div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">أداء الطفل</h1>
+    </header>
+
+    <!-- Performance Summary -->
+    <section class="page-content performance-summary">
+
+        <div class="circle-container">
+            <div class="circle-inner">75%</div>
+        </div>
+
+        <h2 class="section-title">تفاصيل الأداء</h2>
+
+        <div class="performance-table">
+
+            <!-- Table Header -->
+            <div class="row header-row">
+                <div>النشاط</div>
+                <div>العمليات المكتملة</div>
+                <div>التقدم</div>
+            </div>
+
+            <!-- Table Rows -->
+            <div class="row">
+                <div>النشاط 1</div>
+                <div>3</div>
+                <div class="progress">
+                    <div class="progress-fill" style="width:60%"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>النشاط 2</div>
+                <div>5</div>
+                <div class="progress">
+                    <div class="progress-fill" style="width:90%"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>النشاط 3</div>
+                <div>4</div>
+                <div class="progress">
+                    <div class="progress-fill" style="width:75%"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-section">
+            <h2 class="chart-title">التطور الزمني</h2>
+            <div class="chart">
+                <svg viewBox="0 0 300 120">
+                    <!-- المحاور -->
+                    <line x1="20" y1="100" x2="280" y2="100" stroke="#555" stroke-width="2"/>
+                    <line x1="20" y1="20" x2="20" y2="100" stroke="#555" stroke-width="2"/>
+
+                    <!-- الخط البياني -->
+                    <polyline 
+                        points="20,100 70,85 120,60 170,60 220,35"
+                        fill="none"
+                        stroke="#E8A54B"
+                        stroke-width="4"
+                    />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="actions-container">
+            <button class="btn btn-secondary"
+        onclick="window.location.href='home.html'">
+    العودة إلى الصفحة الرئيسية
+</button>
+            <button class="btn btn-primary btn-report"
+                    onclick="window.location.href='weeklyReport.html'">
+                عرض التقرير
+            </button>
+        </div>
+
+    </section>
+
+</body>
+</html>

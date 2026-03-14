@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>القراءة</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="reading-page">
+
+<header>
+
+    <div class="logo">
+        <img src="assets/images/logo.png" alt="شعار بريق" class="logo-img">
+    </div>
+
+    <div class="cloud cloud1">☁️</div>
+    <div class="cloud cloud2">☁️</div>
+    <div class="sun">🌞</div>
+
+</header>
+
+<main>
+
+<h1 class="page-title">القراءة</h1>
+
+<div class="levels">
+
+    <!-- المستوى المبتدئ -->
+    <section class="level-card">
+        <div class="level-title">المستوى المبتدئ</div>
+        <div class="level-options">
+            <span class="level-type">الحروف</span>
+            <span class="status completed">مكتمل</span>
+            <button class="enter-btn" onclick="goToExercise()">ادخل</button>
+        </div>
+    </section>
+
+    <!-- المستوى المتوسط -->
+    <section class="level-card">
+        <div class="level-title">المستوى المتوسط</div>
+        <div class="level-options">
+            <span class="level-type">الكلمات</span>
+            <span class="status in-progress">قيد التقدم</span>
+            <button class="enter-btn" onclick="goToExercise()">ادخل</button>
+        </div>
+    </section>
+
+    <!-- المستوى المتقدم -->
+    <section class="level-card">
+        <div class="level-title">المستوى المتقدم</div>
+        <div class="level-options">
+            <span class="level-type">الجمل</span>
+            <span class="status not-started">لم نبدأ</span>
+         <button class="enter-btn locked" id="advancedBtn">مغلق</button>
+    </section>
+
+</div>
+
+<div class="boy">
+    <img src="assets/images/A boy-reading.png" alt="طفل يقرأ كتاباً">
+</div>
+
+<div class="buttons">
+    <button class="btn primary" onclick="goToExercise()">اذهب للمستوى الحالي</button>
+    <button class="btn secondary" onclick="goBack()">العودة إلى الشاشة الرئيسية</button>
+</div>
+
+</main>
+
+
+<script>
+    
+    // عند تحميل الصفحة
+window.addEventListener("load", () => {
+
+    speak("هذه صفحة القراءة. هيا لنبدا رحلة التعلم معا");
+
+    const beginnerDone = localStorage.getItem("beginnerCompleted");
+    const intermediateDone = localStorage.getItem("intermediateCompleted");
+
+    const advancedBtn = document.getElementById("advancedBtn");
+
+    if(beginnerDone === "true"){
+        // يفتح المستوى المتوسط
+        document.querySelectorAll(".enter-btn")[1].disabled = false;
+    }
+
+    if(intermediateDone === "true"){
+        // يفتح المستوى المتقدم
+        advancedBtn.disabled = false;
+        advancedBtn.classList.remove("locked");
+        advancedBtn.innerText = "ادخل";
+        advancedBtn.onclick = function(){
+            window.location.href="Reading2.html?level=advanced";
+        };
+    }
+});
+    // لحفظ مستوى الطفل ,يعدل اذا بدا الباك اند
+    localStorage.setItem("beginnerCompleted", true);
+// تنقل الصفحات
+function goBack(){
+    window.location.href="mainActivity.html";
+}
+
+function goToExercise(){
+    window.location.href="Reading2.html";
+}
+
+// دالة النطق
+function speak(text){
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "ar-SA";
+    msg.rate = 0.85;
+    msg.pitch = 1.1;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+// شرح الصفحة عند الفتح
+window.addEventListener("load", () => {
+    speak("هذه صفحة القراءة. هيا لنبدا رحلة التعلم معا ");
+});
+
+// قراءة العناصر عند مرور الماوس
+document.querySelectorAll(".reading-page button, .reading-page span, .reading-page h1, .reading-page .level-title")
+.forEach(el => {
+    el.addEventListener("mouseenter", () => {
+        const text = el.innerText.trim();
+        if(text !== ""){
+            speak(text);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدارة المكافآت</title>
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+
+<div class="page manage-rewards">
+
+<div class="page-title">إدارة المكافآت</div>
+
+<!-- الشخصيات -->
+<div class="card">
+    <div class="card-row">
+        <div>
+            <div class="card-title">الشخصيات</div>
+            <div class="card-desc">تكسب بعد الوصول لعدد النقاط المحدد</div>
+        </div>
+        <img src="kids.png" onclick="changeImage(this)" alt="أطفال">
+    </div>
+<div class="edit">
+    <span onclick="deleteCard(this)">🗑 حذف</span>
+    <span onclick="openEdit(this)">✏️ تعديل</span>
+</div>
+</div>
+
+<!-- النجوم -->
+<div class="card">
+    <div class="card-row">
+        <div>
+            <div class="card-title">النجوم</div>
+            <div class="card-desc">تظهر بعد إكمال النشاط</div>
+        </div>
+        <img src="stars.png" onclick="changeImage(this)" alt="نجوم">
+    </div>
+<div class="edit">
+    <span onclick="deleteCard(this)">🗑 حذف</span>
+    <span onclick="openEdit(this)">✏️ تعديل</span>
+</div>
+</div>
+
+<!-- النقاط -->
+<div class="card">
+    <div class="card-row">
+        <div>
+            <div class="card-title">النقاط</div>
+            <div class="card-desc">تكسب بعد إكمال النشاط</div>
+        </div>
+    </div>
+    <div class="points-text">+10..+20..+30</div>
+<div class="edit">
+    <span onclick="deleteCard(this)">🗑 حذف</span>
+    <span onclick="openEdit(this)">✏️ تعديل</span>
+</div>
+</div>
+
+<!-- إضافة -->
+<div class="add-section">
+    <button class="add-btn">+ إضافة مكافأة جديدة</button>
+</div>
+
+<!-- ملف لاختيار صورة -->
+<input type="file" id="imgPicker" accept="image/*" style="display:none" />
+
+<!-- نافذة التعديل -->
+<div id="mainModal" class="modal">
+    <div class="modal-content" id="modalContent"></div>
+</div>
+</div>
+
+<script>
+ function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+        closeDelete(); 
+    }
+});
+
+let currentCard = null;
+
+/* فتح مودال الحذف */
+function deleteCard(btn){
+    currentCard = btn.closest(".card");
+
+    document.getElementById("modalContent").innerHTML = `
+        <h3>أتأكد من الحذف؟</h3>
+        <div class="modal-buttons">
+            <button class="cancel modal-button" onclick="closeModal()">لا</button>
+            <button class="confirm modal-button" onclick="confirmDelete()">نعم</button>
+        </div>
+    `;
+
+    openModal();
+}
+
+function confirmDelete(){
+    if(currentCard){
+        currentCard.remove();
+    }
+    closeModal();
+}
+
+/* فتح مودال التعديل */
+function openEdit(btn){
+    currentCard = btn.closest(".card");
+
+    const title = currentCard.querySelector(".card-title").textContent.trim();
+    const desc = currentCard.querySelector(".card-desc")?.textContent.trim() || "";
+
+    document.getElementById("modalContent").innerHTML = `
+        <h3>تعديل المكافأة</h3>
+
+        <label style="display:block;text-align:right;">العنوان:</label>
+        <input id="editTitle" value="${title}">
+
+        <label style="display:block;text-align:right;">الوصف:</label>
+        <input id="editDesc" value="${desc}">
+
+        <div class="modal-buttons">
+            <button class="cancel modal-button" onclick="closeModal()">إلغاء</button>
+            <button class="confirm modal-button" onclick="saveEdit()">حفظ</button>
+        </div>
+    `;
+
+    openModal();
+}
+
+function saveEdit(){
+    const newTitle = document.getElementById("editTitle").value;
+    const newDesc = document.getElementById("editDesc").value;
+
+    currentCard.querySelector(".card-title").textContent = newTitle;
+
+    if(currentCard.querySelector(".card-desc")){
+        currentCard.querySelector(".card-desc").textContent = newDesc;
+    }
+
+    closeModal();
+}
+
+/* التحكم بالمودال */
+
+function openModal(){
+    document.getElementById("mainModal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("mainModal").style.display="none";
+}
+
+// تغيير الصورة
+function changeImage(imgElement){
+    imgTarget = imgElement;
+    document.getElementById("imgPicker").click();
+}
+
+document.getElementById("imgPicker").addEventListener("change", function(){
+    const file = this.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+        imgTarget.src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+});
+
+// إضافة كرت جديد
+document.querySelector(".add-btn").addEventListener("click", addReward);
+
+function addReward() {
+    const container = document.querySelector(".add-section").parentElement;
+
+    const newCard = document.createElement("div");
+    newCard.className = "card";
+
+    newCard.innerHTML = `
+        <div class="card-row">
+            <div>
+                <div class="card-title">عنوان جديد</div>
+                <div class="card-desc">وصف جديد…</div>
+            </div>
+            <img src="stars.png" style="width:150px" onclick="changeImage(this)">
+        </div>
+
+        <div class="edit">
+            <span onclick="deleteCard(this)">🗑 حذف</span>
+            <span onclick="openEdit(this)">✏️ تعديل</span>
+        </div>
+    `;
+
+    container.insertBefore(newCard, document.querySelector(".add-section"));
+}
+
+</script>
+
+</body>
+</html>

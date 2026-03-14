@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تدريب النطق</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+<main class="container" role="main">
+
+<!-- صور زخرفية -->
+ <!-- Clouds and Sun -->
+ <div class="cloud cloud1">☁️</div>
+ <div class="cloud cloud2">☁️</div>
+ <div class="sun">🌞</div>
+<img src="imag/book.png" class="decorative bottom-left" alt="" aria-hidden="true">
+<img src="imag/boy3.png" class="decorative bottom-right" alt="" aria-hidden="true">
+
+<h1>تدريب النطق</h1>
+
+<section>
+  <div class="instructions">
+    <span>استمع إلى الكلمة ثم انطقها</span>
+
+    <button
+      id="playBtn"
+      class="play-btn"
+      aria-label="تشغيل صوت الكلمة الحالية"
+      type="button">
+      ▶
+    </button>
+  </div>
+</section>
+
+<section aria-label="الكلمة المطلوبة">
+  <div class="word-card">
+    <span id="targetWord"></span>
+  </div>
+</section>
+
+<button
+  id="micBtn"
+  class="mic"
+  aria-label="تسجيل نطق الكلمة الحالية"
+  type="button">
+  🎤
+</button>
+
+<div
+  id="result"
+  class="result"
+  aria-live="polite"
+  aria-atomic="true">
+</div>
+
+</main>
+
+<script>
+  localStorage.setItem("beginnerCompleted", true);
+
+const words = [
+  { text: "أمي" },
+  { text: "بيت" },
+  { text: "قلم" }
+];
+
+let currentIndex = 0;
+
+const playBtn = document.getElementById("playBtn");
+const micBtn = document.getElementById("micBtn");
+const resultDiv = document.getElementById("result");
+const wordSpan = document.getElementById("targetWord");
+
+let mediaRecorder;
+let audioChunks = [];
+let isRecording = false;
+
+function loadWord(){
+  wordSpan.textContent = words[currentIndex].text;
+}
+
+loadWord();
+
+playBtn.addEventListener("click", () => {
+  const word = words[currentIndex].text;
+
+  const utterance = new SpeechSynthesisUtterance(word);
+
+  utterance.lang = "ar-SA"; // عربي
+  utterance.rate = 0.8;     // سرعة أبطأ للأطفال
+
+  speechSynthesis.speak(utterance);
+});
+
+micBtn.addEventListener("click", async () => {
+
+  if (isRecording) return;
+
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
+    mediaRecorder = new MediaRecorder(stream);
+
+    mediaRecorder.start();
+isRecording = true;
+    micBtn.classList.add("recording");
+
+    resultDiv.textContent = "جاري التسجيل...";
+    resultDiv.className = "result";
+
+    mediaRecorder.ondataavailable = e => {
+      audioChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = async () => {
+
+      isRecording = false;
+      micBtn.classList.remove("recording");
+
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+      audioChunks = [];
+
+      resultDiv.textContent = "جاري تحليل النطق...";
+
+      try{
+        const response = await sendToBackend(audioBlob);
+        handleResult(response);
+      }
+      catch{
+        resultDiv.textContent = "حدث خطأ في الاتصال بالخادم";
+        resultDiv.classList.add("error");
+      }
+    };
+
+    setTimeout(() => {
+      mediaRecorder.stop();
+    }, 3000);
+
+  }catch{
+    resultDiv.textContent = "تم رفض إذن الميكروفون";
+    resultDiv.classList.add("error");
+  }
+
+});
+
+async function sendToBackend(audioBlob){
+
+  const formData = new FormData();
+  formData.append("audioFile", audioBlob);
+  formData.append("expectedWord", words[currentIndex].text);
+
+  const response = await fetch("https://localhost:5001/api/pronunciation", {
+    method: "POST",
+    body: formData
+  });
+
+  if(!response.ok)
+    throw new Error("Server error");
+
+  return await response.json();
+}
+
+function handleResult(data){
+
+  if(data.isCorrect){
+
+    resultDiv.textContent = "أحسنت";
+    resultDiv.className = "result success";
+
+    setTimeout(()=>{
+      currentIndex++;
+
+      if(currentIndex < words.length){
+        loadWord();
+        resultDiv.textContent = "";
+      }else{
+        // كل الكلمات انتهت -> اذهب لصفحة نتيجة النشاط
+        window.location.href = "ActivityResult.html"; // غيّر الرابط حسب صفحة النتائج عندك
+      }
+
+    },2000);
+
+  }else{
+    resultDiv.textContent = "حاول مرة أخرى";
+    resultDiv.className = "result error";
+  }
+}
+</script>
+
+</body>
+</html>    

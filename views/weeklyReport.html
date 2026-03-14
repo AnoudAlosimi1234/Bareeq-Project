@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير التقدم الأسبوعي - بريق</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="page page-weekly-report">
+
+    <!-- Decorative Elements -->
+    <div class="decor-sun" aria-hidden="true">🌞</div>
+    <div class="decor-cloud decor-cloud--left" aria-hidden="true">☁️</div>
+    <div class="decor-cloud decor-cloud--right" aria-hidden="true">☁️</div>
+
+    <main class="page-content weekly-report-section">
+
+        <!-- Title and Date -->
+        <header class="report-header">
+            <h1 class="report-title">تقرير التقدم الأسبوعي</h1>
+            <p class="report-date">1 إلى 7 نوفمبر</p>
+            <div class="child-name">بدر</div>
+        </header>
+
+        <!-- Performance Circle -->
+        <div class="performance-circle">
+            <div class="circle">
+                <div class="circle-inner">75%</div>
+            </div>
+            <p class="reading-level">مستوى القراءة: جيد جداً</p>
+        </div>
+
+        <!-- Summary Boxes -->
+        <section class="summary-section">
+            <h2 class="section-title">ملخص الأداء</h2>
+            <div class="summary-boxes">
+                <div class="summary-box completed">
+                    ✔ 12<br>الأنشطة المكتملة
+                </div>
+                <div class="summary-box new">
+                    +5<br>الأنشطة الجديدة
+                </div>
+                <div class="mini-chart">
+                    <svg viewBox="0 0 150 90" width="150" height="90">
+                        <!-- المحاور -->
+                        <line x1="15" y1="75" x2="140" y2="75" stroke="#444" stroke-width="2"/>
+                        <line x1="15" y1="10" x2="15" y2="75" stroke="#444" stroke-width="2"/>
+                        <!-- الخط -->
+                        <polyline points="15,75 40,65 65,55 90,55 115,40" 
+                                  fill="none" stroke="#E8A54B" stroke-width="4" stroke-linecap="round"/>
+                        <!-- النقاط -->
+                        <circle cx="40" cy="65" r="4" fill="#E8A54B"/>
+                        <circle cx="65" cy="55" r="4" fill="#E8A54B"/>
+                        <circle cx="90" cy="55" r="4" fill="#E8A54B"/>
+                        <circle cx="115" cy="40" r="4" fill="#E8A54B"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Points -->
+        <div class="points-earned">
+            ⭐ 420<br>النقاط المكتسبة
+        </div>
+
+        <!-- Learning Notes -->
+        <section class="learning-notes">
+            <strong>ملاحظات التعلم</strong>
+            <p>
+                أظهر الطفل تحسنًا ملحوظًا في مهارة القراءة والتمييز البصري.
+                ننصح بالاستمرار في قراءة القصص القصيرة لتحسين سرعة الفهم.
+            </p>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="actions-container">
+  <a href="home.html" class="btn btn-home">العودة إلى الشاشة الرئيسية</a>
+<button class="btn btn-pdf" id="downloadPdf">تحميل بصيغة PDF</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const { jsPDF } = window.jspdf;
+
+document.getElementById("downloadPdf").addEventListener("click", () => {
+    const doc = new jsPDF();
+
+    // مثال: نجيب اسم المستخدم
+    const userName = document.querySelector(".user-name")?.innerText || "اسم المستخدم";
+    
+    // مثال: نجيب النشاطات
+    const activities = Array.from(document.querySelectorAll(".activity-card .activity-content strong"))
+                        .map(el => el.innerText);
+
+    // مثال: نجيب نتائج النشاطات
+    const results = Array.from(document.querySelectorAll(".activity-card .activity-content p"))
+                        .map(el => el.innerText);
+
+    // ابدأ كتابة التقرير
+    doc.setFontSize(16);
+    doc.text(`تقرير ${userName}`, 20, 20);
+
+    doc.setFontSize(12);
+    activities.forEach((activity, i) => {
+        doc.text(`${i+1}. ${activity} - ${results[i]}`, 20, 30 + i*10);
+    });
+
+    // حفظ الملف
+    doc.save(`${userName}_report.pdf`);
+});
+</script>
+        </div>
+
+    </main>
+
+</body>
+</html>

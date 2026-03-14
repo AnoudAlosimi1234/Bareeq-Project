@@ -1,0 +1,194 @@
+/* ===============================
+   Admin Login Clean Design
+=================================*/
+
+/* الخلفية */
+.admin-page{
+    background:#D8CDBA;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* الكرت الكبير */
+.admin-card{
+    background:#FFF9E9;
+    width:380px;
+    padding:40px 30px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+/* اللوقو */
+.admin-logo-img{
+    width:300px;
+    margin-bottom:15px;
+}
+
+/* العنوان */
+.admin-title{
+    color:#F28C38;
+    margin-bottom:30px;
+    font-size:22px;
+}
+
+/* الفورم */
+.admin-login-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* الحقول */
+.admin-login-form input{
+    padding:14px;
+    border:none;
+    border-radius:30px;
+    background:#5AA6C4;
+    color:#fff;
+    font-size:14px;
+    text-align:center;
+    outline:none;
+}
+
+/* placeholder */
+.admin-login-form input::placeholder{
+    color:#eaf6fb;
+}
+
+/* نسيت كلمة المرور */
+.admin-forgot{
+    font-size:13px;
+    color:#555;
+    text-decoration:none;
+    margin-top:-8px;
+}
+
+.admin-forgot:hover{
+    color:#F28C38;
+}
+
+/* زر تسجيل */
+.admin-login-btn{
+    padding:13px;
+    border:none;
+    border-radius:30px;
+    background:#E58B7C;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.admin-login-btn:hover{
+    transform:scale(1.05);
+}
+body{
+    margin:0;
+    font-family:'Tajawal', sans-serif;
+    background:#D8CDBA;
+}
+
+/* الحاوية الرئيسية */
+.admin-dashboard{
+    width:100%;
+    min-height:100vh;
+    padding:30px 60px;
+    box-sizing:border-box;
+}
+
+/* Header */
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.admin-menu{
+    font-size:26px;
+    cursor:pointer;
+}
+
+.admin-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+}
+
+.admin-avatar{
+    font-size:26px;
+}
+
+/* Title */
+.admin-title{
+    text-align:center;
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:40px;
+}
+
+/* Cards Grid */
+.admin-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.admin-card{
+    background:#fff3cd;
+    border-radius:18px;
+    padding:35px 5px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.admin-card:hover{
+    transform:translateY(-8px);
+}
+
+.admin-icon{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.admin-card p{
+    margin:0;
+    font-weight:700;
+    font-size:18px;
+}
+
+/* Alert Box */
+.admin-alert-box{
+    background:#F8E6A5;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:30px;
+    font-size:16px;
+}
+
+/* Logout */
+.admin-logout-container{
+    text-align:center;
+}
+
+.admin-logout-btn{
+    background:#2f4f6f;
+    color:white;
+    border:none;
+    padding:12px 35px;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.admin-logout-btn:hover{
+    opacity:0.9;
+}

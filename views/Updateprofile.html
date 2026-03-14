@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تعديل المعلومات الشخصية</title>
+
+<link rel="stylesheet" href="assets/css/main.css">
+
+</head>
+<body>
+<div class="edit-profile-page">
+
+<img src="assets/images/logo.png" class="edit-logo">
+
+<h2 class="edit-title">تعديل المعلومات الشخصية</h2>
+
+<div class="edit-avatar">
+<img src="assets/images/Avatar.png">
+</div>
+
+<form class="edit-form">
+
+<input class="edit-input" type="text" placeholder="تعديل الاسم">
+
+<input class="edit-input" type="email" placeholder="تعديل البريد الإلكتروني">
+
+<input class="edit-input" type="password" placeholder="كلمة المرور">
+
+<input class="edit-input" type="password" placeholder="كلمة المرور الجديدة">
+
+<div class="edit-buttons">
+
+<button class="save-btn" onclick="saveData()">حفظ التعديلات</button>
+
+<script>
+function saveData() {
+
+    // مثال حفظ بيانات
+    let name = document.querySelector(".name-input").value;
+
+    // تخزين مؤقت 
+    localStorage.setItem("userName", name);
+
+    // تحويل لصفحة البروفايل
+    window.location.href = "viweprofile.html";
+
+}
+</script>
+
+<button class="edit-cancel" type="reset"
+onclick="window.history.back()">
+إلغاء
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

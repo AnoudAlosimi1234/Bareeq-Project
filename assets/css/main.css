@@ -1,0 +1,3467 @@
+/* ===============================
+   RESET + BASE
+=================================*/
+.logo {
+    width:100%;
+    display:flex;
+    justify-content:center; 
+    margin-bottom:30px;     
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Tajawal", sans-serif;
+    background: #F4E9D8;
+    direction: rtl;
+    overflow-x: hidden;
+}
+/* Images */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* Links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+/* ===============================
+   Decorative Elements
+=================================*/
+.sun, .decor-sun {
+    position:fixed;
+    top:20px;
+    right:30px;
+    font-size:60px;
+}
+
+.cloud, .decor-cloud {
+    position:fixed;
+    font-size:50px;
+}
+
+.cloud1, .decor-cloud--left {
+    top:80px;
+    left:30px;
+}
+
+.cloud2, .decor-cloud--right {
+    top:140px;
+    right:80px;
+}
+
+/* ===============================
+   Buttons (موحد لكل الصفحات)
+=================================*/
+.btn, .send-btn, .thankyou-btn {
+    background:#6CCAE4;
+    color:white;
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+    text-decoration:none;
+    display:inline-block;
+    transition:0.2s;
+    box-shadow:0 3px 6px rgba(0,0,0,0.12);
+}
+
+.btn:hover,
+.send-btn:hover,
+.thankyou-btn:hover{
+    transform:translateY(-3px);
+}
+
+.page-contact{
+    min-height:100vh;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    position:relative;
+   
+    box-sizing:border-box;
+}
+
+/* Title */
+.page-contact .title{
+    font-size:28px;
+    font-weight:bold;
+    color:#2E3A63;
+    margin-top:30px;
+    text-align:center;
+}
+
+/* Subtitle */
+.page-contact .subtitle{
+    font-size:16px;
+    color:#555;
+    margin-bottom:30px;
+    text-align:center;
+}
+
+/* Form */
+.page-contact .form{
+    width:90%;
+    max-width:450px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    z-index:2;
+}
+
+/* Input, Textarea, Select */
+.page-contact input,
+.page-contact textarea,
+.page-contact select{
+    padding:12px 15px;
+    border-radius:18px;
+    border:none;
+    background:#F8E6A5;
+    font-family:"Tajawal", sans-serif;
+    outline:none;
+    resize:none;
+    font-size:14px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.08);
+}
+
+/* Textarea أكبر */
+.page-contact textarea{
+    min-height:120px;
+    padding:15px;
+}
+
+/* Focus */
+.page-contact input:focus,
+.page-contact textarea:focus,
+.page-contact select:focus{
+    box-shadow:0 0 0 3px rgba(108,202,228,0.3);
+}
+
+/* Send Button */
+.page-contact .send-btn{
+    background:#6CCAE4;
+    color:white;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+    box-shadow:0 3px 6px rgba(0,0,0,0.12);
+}
+.page-contact .send-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* Child Image Bottom Right */
+.page-contact .bottom-right{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    width:150px;
+    max-width:25%;
+    z-index:1;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .page-contact input,
+    .page-contact textarea,
+    .page-contact select{
+        font-size:13px;
+        padding:10px 12px;
+    }
+    .page-contact .send-btn{
+        padding:10px;
+    }
+    .page-contact .bottom-right{
+        width:120px;
+    }
+}
+/* Logo / شعار بريق */
+.page-contact .logo {
+    width:100%;
+    display:flex;
+    justify-content:center; /* يضع الشعار في المنتصف تمامًا */
+    margin-bottom:30px;     /* مسافة أسفل الشعار */
+}
+
+.page-contact .logo img {
+    width:250px;        /* حجم أكبر مناسب للويب أب */
+    max-width:60%;      /* لا يتجاوز 60% من عرض الشاشة */
+    height:auto;
+}
+/* Main Boxes Section */
+.main-box {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:40px;
+    z-index:2;
+}
+
+.feature {
+    background:#F8E6A5;
+    border-radius:20px;
+    width:180px;
+    height:180px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:15px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature:hover {
+    transform:translateY(-5px);
+    box-shadow:0 6px 12px rgba(0,0,0,0.15);
+}
+
+.feature .icon {
+    font-size:50px; /* حجم الأيقونة */
+    margin-bottom:10px;
+}
+
+.feature p {
+    font-size:16px;
+    font-weight:bold;
+    color:#2E3A63;
+    margin:0;
+}
+
+.feature-link{
+    text-decoration: none;  /* ✨ يشيل الخط */
+    color: inherit;         /* يخلي اللون زي الموجود */
+    display: block;          /* عشان يشمل كل المربع */
+}
+/* ===== Home Page ===== */
+.home-page {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Logo */
+.home-page .logo {
+    position: relative;
+    display: inline-block; /* الشعار يبقى في الوسط */
+}
+
+/* الشعار الرئيسي */
+.home-page .logo > .logo-img {
+    width: 180px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* الشعار بالمنتصف */
+}
+
+.home-page .logo a img {
+    position: absolute;
+    right: 15px;       /* على اليمين */
+    top: -10px;         /* أعلى الشعار قليلاً */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #FFB703;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 1000;      /* فوق كل العناصر */
+}
+
+.home-page .logo a img:hover {
+    transform: scale(1.1); /* تكبير بسيط عند المرور */
+}
+
+/* Main Boxes */
+.home-page .main-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 150px; /* بعيد عن الشعار */
+}
+
+.home-page .feature {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.home-page .feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.home-page .feature .icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.home-page .feature p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2E3A63;
+    margin: 0;
+}
+
+.home-page .sun {
+    position: absolute;       /* لازم absolute عشان نحدد مكانها */
+    top: 80px;                /* تحت البروفايل قليلاً */
+    right: 15px;              /* يمين الصفحة */
+    width: 50px;              /* حجم الشمس */
+    height: 50px;
+    font-size: 50px;          /* أو حسب حجم الصورة/الأيقونة */
+    z-index: 1;               /* تحت البروفايل */
+}
+
+/* ===== Breeq Section ===== */
+.home-page .breeq-section {
+    margin-top:60px;
+    text-align:center;
+}
+
+/* حاوية الصورة */
+.home-page .breeq-container {
+    display:flex;
+    justify-content:center;  /* توسيط أفقي */
+    align-items:center;
+    width:100%;
+}
+
+/* الصورة نفسها */
+.home-page .wave-characters {
+    width:260px;
+    max-width:90%;
+    height:auto;
+    display:block;
+}
+
+/* الأسماء */
+.home-page .breeq-names {
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    font-size:20px;
+    font-weight:bold;
+    color:#2E3A63;
+    margin-top:12px;
+}
+
+
+/* ===== Index Page ===== */
+.index-page {
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Logo */
+.index-page .logo-img {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+/* Welcome Text */
+.index-page .welcome-text h1 {
+    font-size: 32px;
+    color: #2E3A63;
+    margin-bottom: 10px;
+}
+
+.index-page .welcome-text p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.index-page .buttons-box {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.index-page .buttons-box .btn {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.index-page .buttons-box .btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Character Image */
+.index-page .character-img {
+    width: 250px;
+    max-width: 90%;
+    height: auto;
+    margin-top: 20px;
+}
+/* ===== Login Page ===== */
+.login-page {
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Logo */
+.login-page .logo-img {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+/* Login Form */
+.login-page .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+.login-page .login-form input {
+    padding: 12px 15px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    background: #F8E6A5;
+    outline: none;
+}
+
+.login-page .login-form input:focus {
+    box-shadow: 0 0 0 3px rgba(108,202,228,0.3);
+}
+
+.login-page .login-form .login-btn {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-page .login-form .login-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Footer Text */
+.login-page .footer-text {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Character Image */
+.login-page .character-img {
+    width: 250px;
+    max-width: 90%;
+    height: auto;
+}
+/* زر نسيت كلمة المرور */
+.forgot-link{
+    display:block;
+    margin-top:-5px;
+    margin-bottom:15px;
+    font-size:13px;
+    color:#555;
+    text-decoration:none;
+    text-align:right;
+}
+
+.forgot-link:hover{
+    color:#F28C38;
+}
+/* ===== Logout Page ===== */
+.logout-page {
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Sun & Clouds */
+.logout-page .sun {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+}
+
+.logout-page .cloud {
+    position: absolute;
+    font-size: 60px;
+}
+
+.logout-page .cloud1 { top: 80px; left: 10%; }
+.logout-page .cloud2 { top: 50px; right: 10%; }
+
+/* Logout Text */
+.logout-page .logout-text h1 {
+    font-size: 28px;
+    color: #2E3A63;
+    margin-bottom: 10px;
+}
+
+.logout-page .logout-text p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.logout-page .buttons-box {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.logout-page .buttons-box .btn {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.logout-page .buttons-box .btn:hover {
+    transform: translateY(-3px);
+}
+
+/* Character Image */
+.logout-page .character-img {
+    width: 300px;
+    max-width: 90%;
+    height: auto;
+    margin-top: 20px;
+}
+/* ===== Account Page ===== */
+.account-page {
+    text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo */
+.account-page .logo-img {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+/* Title */
+.account-page .page-title {
+    font-size: 28px;
+    color: #2E3A63;
+    margin-bottom: 25px;
+}
+/* ============================= */
+/* ====== ACCOUNT PAGE ========= */
+/* ============================= */
+
+.account-card {
+    background: #F8E6A5;
+    width: 90%;
+    max-width: 750px;   /* أعرض للويب */
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    margin: 30px auto;
+}
+
+/* توزيع الصورة والبيانات */
+.account-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+/* صورة الحساب */
+.account-image img {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: white;
+    padding: 10px;
+}
+
+/* البيانات */
+.account-info {
+    flex: 1;
+}
+
+/* كل صف */
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+    font-size: 20px;
+    color: #2E3A63;
+}
+
+/* اسم الحقل */
+.label {
+    font-weight: bold;
+    margin-left: 6px;   /* يخلي الكلمة جنب النقطتين */
+}
+
+/* القيمة */
+.value {
+    margin-right: 4px;
+}
+
+/* الأزرار */
+.account-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* تحسين شكل الأزرار */
+.account-buttons .btn {
+    padding: 12px 25px;
+    font-size: 18px;
+}
+/* ===============================
+   Notification Page Styles
+=================================*/
+.page-notification{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:"Tajawal", sans-serif;
+}
+
+/* الكرت */
+.notification-card{
+    width:320px;
+    height:360px;
+    background:#FFF8D4;
+    border-radius:30px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+
+/* الصورة */
+.notification-image{
+    width:180px;
+    height:auto;
+    margin-bottom:20px;
+}
+
+/* النص */
+.notification-text{
+    font-size:22px;
+    font-weight:bold;
+    color:#2E3A63;
+    line-height:1.4;
+}
+
+/* ================================= */
+/* ===== EMPTY NOTIFICATIONS ======= */
+/* ================================= */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #F0F8FF;
+    text-align: center;
+    direction: rtl;
+}
+
+/* الصفحة */
+.page-empty-notifications {
+    min-height: 100vh;
+    position: relative;
+}
+
+/* الهيدر */
+.page-header {
+    margin-top: 40px; /* اللوجو يبقى ثابت في الأعلى */
+    height: 80px; /* يمكنك ضبطه حسب الحاجة */
+}
+
+/* البوكس المربع */
+.empty-notifications {
+    background: #C8E6FF;
+    width: 250px;
+    height: 300px;
+    margin: 40px auto 0 auto; /* فقط هامش علوي */
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* يجعل الصورة والنص في منتصف الكرت عموديًا */
+    gap: 15px; /* المسافة بين الصورة والنص */
+}
+
+/* العنوان */
+.page-title {
+    font-size: 22px;
+    margin: 0;
+    color: #2E3A63;
+}
+
+/* الصورة */
+.empty-image {
+    width: 150px; /* حجم مناسب للبوكس */
+    max-width: 100%;
+}
+
+/* النص */
+.empty-text {
+    font-size: 18px;
+    color: #2E3A63;
+    text-align: center;
+    word-wrap: break-word; /* يكسر النص الطويل بدل الخروج من البوكس */
+}
+/* ===============================
+   PAGE PERFORMANCE
+=================================*/
+
+.page-performance {
+    min-height: 100vh;
+    position: relative;
+    font-family: "Tajawal", sans-serif;
+    padding-bottom: 50px;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-top: 180px; /* بعد الشمس والغيوم */
+}
+
+.page-title {
+    font-size: 30px;
+    color: #2E3A63;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* PERFORMANCE SUMMARY */
+.performance-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* الدائرة الكبيرة */
+.circle-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#6CCAE4 0% 75%, #eee 75% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2E3A63;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+
+/* جدول الأداء */
+.performance-table {
+    width: 90%;
+    max-width: 500px;
+    background: #FFF8D4;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.performance-table .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #E0D1A5;
+}
+
+.performance-table .row.header-row {
+    font-weight: bold;
+    color: #2E3A63;
+    border-bottom: 2px solid #E8A54B;
+}
+
+/* Progress bars */
+.progress {
+    width: 100px;
+    height: 12px;
+    background: #F0D88A;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #6CCAE4;
+    border-radius: 10px;
+}
+
+/* التطور الزمني */
+.chart-section {
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.chart-title {
+    font-size: 20px;
+    color: #2E3A63;
+    margin-bottom: 15px;
+}
+
+/* زر التقرير */
+.actions-container {
+    margin-top: 20px;
+}
+
+.actions-container .btn-report {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: 0.2s;
+}
+
+.actions-container .btn-report:hover {
+    transform: translateY(-3px);
+}
+
+/* ===============================
+   PAGE Reminders
+=================================*/
+.page-activities {
+    min-height: 100vh;
+    font-family: "Tajawal", sans-serif;
+    position: relative;
+    padding-bottom: 120px;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.main-children {
+    width: 120px;
+}
+
+/* Page Title */
+.page-title {
+    text-align: center;
+    font-size: 26px;
+    color: #d88a2d;
+    margin: 25px 0;
+}
+
+/* Activities List */
+.activities-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 0 10px;
+}
+
+/* Activity Card */
+.activity-card {
+    background: #F8E6A5; /* لون جديد للبوكس */
+    border-radius: 25px;
+    width: 200px;      /* أكبر شوية */
+    height: 240px;     /* أكبر شوية */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image inside card */
+.activity-image {
+    width: 200px;   /* أكبر من قبل */
+    height: 200px;  /* أكبر من قبل */
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* Text inside card */
+.activity-content {
+    text-align: center;
+    font-size: 16px;
+    color: #2E3A63;
+}
+
+.activity-content strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* Bottom Illustrations */
+.illustration-bottom-book,
+.illustration-bottom-girl {
+    position: fixed;
+    bottom: 0;
+    width: 200px;  /* أكبر من قبل */
+    z-index: -1;
+}
+
+.illustration-bottom-book {
+    left: 20px;
+}
+
+.illustration-bottom-girl {
+    right: 20px;
+}
+/* ===== صفحة إنشاء الحساب فقط ===== */
+
+.page-signup {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #f4e7d4, #efe1c6);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* الهيدر */
+.page-signup .page-header {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0 10px;
+}
+
+/* اللوقو */
+.page-signup .site-logo img {
+    width: 120px;
+}
+
+/* القسم الرئيسي */
+.page-signup .form-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* الكارد */
+.page-signup .form-container {
+    background: #f6dc95;
+    width: 420px;
+    max-width: 90%;
+    padding: 40px 35px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+/* الحقول */
+.page-signup .form-group {
+    margin-bottom: 18px;
+    text-align: right;
+}
+
+.page-signup .form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+.page-signup .form-control {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: #eeeeee;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.page-signup .form-control:focus {
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(94, 184, 199, 0.3);
+}
+
+/* الزر */
+.page-signup .btn-signup {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: #5eb8c7;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.page-signup .btn-signup:hover {
+    background: #49a7b7;
+    transform: translateY(-2px);
+}
+
+/* رسالة الخطأ */
+.page-signup .error-message {
+    color: #d9534f;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* النص السفلي */
+.page-signup .page-footer-text {
+    margin-top: 35px;
+    font-size: 18px;
+    color: #444;
+    text-align: center;
+}
+
+/* صورة الطفل */
+.page-signup .illustration-character img {
+    width: 140px;
+    margin-top: 20px;
+}
+
+/* ريسبونسف */
+@media (max-width: 480px) {
+    .page-signup .form-container {
+        padding: 30px 20px;
+    }
+
+    .page-signup .site-logo img {
+        width: 100px;
+    }
+}
+/* الهيدر يكون متمركز */
+.page-signup .page-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;   /* هذا يخليه بالنص */
+    align-items: center;
+    padding: 40px 0 20px;
+}
+
+/* اللوقو نفسه */
+.page-signup .site-logo2 {
+    text-align: center;
+}
+
+.page-signup .site-logo2 img {
+    width: 130px;
+    display: block;
+    margin: 0 auto;  /* تأكيد التوسيط */
+}
+
+/* ================================= */
+/* PAGE THANK YOU */
+/* ================================= */
+
+.page-thankyou {
+    font-family: "Tajawal", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F4E7D4;
+    padding: 20px;
+    text-align: center;
+}
+
+/* القسم الرئيسي */
+.page-thankyou .thankyou-section {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* توسيط كل العناصر */
+}
+
+/* حاوية الصورة */
+.page-thankyou .thankyou-illustration {
+    width: 100%;
+    display: flex;
+    justify-content: center;   /* توسيط أفقي */
+    margin-bottom: 20px;
+}
+
+/* الصورة */
+.page-thankyou .thankyou-illustration img {
+    width: 220px;
+    max-width: 80%;
+    display: block;
+}
+
+/* العنوان */
+.page-thankyou .thankyou-title {
+    font-size: 28px;
+    color: #2E3A63;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* النص */
+.page-thankyou .thankyou-subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* الأزرار */
+.page-thankyou .actions-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* توسيط الزر */
+}
+
+/* زر الرجوع */
+.page-thankyou .btn-thankyou {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    transition: 0.2s;
+}
+
+.page-thankyou .btn-thankyou:hover {
+    transform: translateY(-3px);
+}
+
+/* ================================= */
+/* PAGE PROFILE */
+/* ================================= */
+
+.page-profile {
+    font-family: "Tajawal", sans-serif;
+    min-height: 100vh;
+    position: relative;
+    padding: 20px;
+}
+
+/* Decorative Elements */
+.decor-sun, .decor-cloud {
+    font-size: 50px;  
+    position: absolute;
+    z-index: 0;
+}
+
+.decor-cloud--left {
+    top: 60px;
+    left: 20px;
+}
+
+.decor-cloud--right {
+    top: 100px;
+    right: 20px;
+}
+
+/* Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2E3A63;
+}
+
+/* Profile Cards Container */
+.profile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+/* Individual Card */
+.profile-card {
+    background: #FFF8D4;
+    border-radius: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Profile Avatar */
+.profile-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+/* Profile Info */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-name, .profile-title {
+    font-size: 18px;
+    color: #2E3A63;
+    font-weight: bold;
+}
+
+.profile-sub {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Profile Icons */
+.profile-icon {
+    font-size: 30px;
+    color: #E8A54B;
+}
+
+/* Divider */
+.divider {
+    width: 80%;
+    height: 1px;
+    background: #E0D1A5;
+    margin: 20px auto;
+}
+
+/* Action Buttons */
+.actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.actions-container .btn {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.actions-container .btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-back-learning {
+    background: #F8E6A5;
+    color: #2E3A63;
+}
+
+/* ================================= */
+/* PAGE WEEKLY REPORT */
+/* ================================= */
+
+.page-weekly-report {
+    font-family: "Tajawal", sans-serif;
+    min-height: 100vh;
+    position: relative;
+    padding: 20px;
+}
+
+
+/* Page Header */
+.report-header {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.report-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2E3A63;
+    margin-bottom: 5px;
+}
+
+.report-date, .child-name {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Performance Circle */
+.performance-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#E8A54B 0% 75%, #eee 75% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2E3A63;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.reading-level {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #2E3A63;
+}
+
+/* Summary Section */
+.summary-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #2E3A63;
+    margin-bottom: 15px;
+}
+
+.summary-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.summary-box {
+    background-color: #FFF8D4;
+    color: #2E3A63;
+    border-radius: 20px;
+    padding: 15px 20px;
+    min-width: 120px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Mini Chart */
+.mini-chart {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+/* Points Earned */
+.points-earned {
+    background: #FFF8D4;
+    border-radius: 25px;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2E3A63;
+    margin: 20px auto;
+    width: 200px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Learning Notes */
+.learning-notes {
+    max-width: 500px;
+    margin: 20px auto;
+    background: #FFF8D4;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #2E3A63;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: right;
+}
+
+.learning-notes strong {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Action Buttons */
+.actions-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.actions-container .btn {
+    background: #6CCAE4;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: 0.2s;
+}
+
+.actions-container .btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-pdf {
+    background: #F8E6A5;
+    color: #2E3A63;
+}
+
+/* ===============================
+   PAGE ACTIVITY RESULT
+=================================*/
+
+.page-activity-result {
+
+    min-height: 100vh;
+    font-family: "Tajawal", sans-serif;
+    position: relative;
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Logo */
+.logo-section {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.page-logo-img {
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.page-logo-text {
+    font-size: 24px;
+    color: #2E3A63;
+    font-weight: bold;
+}
+
+/* Title */
+.activity-result-title {
+    font-size: 28px;
+    color: #2E3A63;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0 40px 0;
+}
+
+/* Characters */
+.characters {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.character-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.character-card img {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+.character-card p {
+    font-size: 16px;
+    color: #2E3A63;
+    font-weight: 600;
+}
+
+/* Stars Section */
+.stars-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.stars-section .star-row {
+    font-size: 30px;
+    margin: 5px 0;
+}
+
+/* Buttons */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.buttons-container .btn {
+    background-color: #6CCAE4;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: 0.2s;
+}
+
+.buttons-container .btn:hover {
+    transform: translateY(-3px);
+}
+ /* ================================= */
+/* choose-character */
+
+
+.choose-character{
+    margin:0;
+    font-family:'Tajawal', sans-serif;
+    background:#F4E9D8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.choose-character .character-page{
+    width:380px;
+    background:#FFF9E9;
+    padding:20px;
+    border-radius:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.choose-character .page-header{
+    text-align:center;
+    margin-bottom:25px;
+    position:relative;
+}
+
+.choose-character .back-btn{
+    position:absolute;
+    left:0;
+    text-decoration:none;
+    font-size:20px;
+    color:#6B6B6B;
+}
+
+.choose-character .page-header h2{
+    margin:0;
+    font-size:18px;
+    color:#D48A5C;
+}
+
+.choose-character .page-header p{
+    margin:5px 0 0;
+    font-size:14px;
+    color:#666;
+}
+
+.choose-character .characters-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.choose-character .character-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.choose-character .character-item img{
+    width:80px;
+}
+.choose-character .name-btn{
+    background:#F6A96C;
+    border:none;
+    padding:8px 0;
+    border-radius:10px;
+    font-family:'Tajawal', sans-serif;
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+
+    width:120px;          /*  يخلي كل الأزرار نفس العرض */
+    text-align:center;    /* توسيط النص */
+}
+.choose-character .name-btn:hover{
+    background:#e89255;
+}
+
+.choose-character .bottom-buttons{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+}
+
+.choose-character .primary-btn{
+    background:#6EC1E4;
+    border:none;
+    padding:10px 25px;
+    border-radius:10px;
+    color:white;
+    font-family:'Tajawal', sans-serif;
+    cursor:pointer;
+}
+
+.choose-character .secondary-btn{
+    background:#B5D4E8;
+    border:none;
+    padding:10px 25px;
+    border-radius:10px;
+    color:white;
+    font-family:'Tajawal', sans-serif;
+    cursor:pointer;
+}
+.choose-character .name-btn.active{
+    background:#4CAF50;
+    transform:scale(1.05);
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+.choose-character .home-btn{
+    position:absolute;
+    right:0;           /* لأنه اتجاه الصفحة RTL */
+    text-decoration:none;
+    font-size:20px;
+    color:#6B6B6B;
+    background:#fff;
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.choose-character .home-btn:hover{
+    background:#F6A96C;
+    color:white;
+}
+
+/* ===============================
+   User Reset Card Specific Styles
+=================================*/
+.user-reset-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* يجعل الكرت دائمًا في منتصف الشاشة عموديًا */
+    padding: 20px;
+    background-color: #F4E9D8; /* خلفية الصفحة */
+}
+
+.user-reset-card {
+    background-color: #F8E6A5; /* لون الكرت */
+    padding: 40px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* ظل أكبر وأكثر وضوح */
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-reset-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25); /* تأثير Hover للكرت */
+}
+
+
+.user-reset-title {
+    font-size: 24px;
+    color: #F28C38; /* عنوان واضح */
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.user-reset-form input {
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 20px; /* مسافة أكبر بين الحقول */
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.user-reset-form input:focus {
+    border-color: #f28c38;
+    box-shadow: 0 0 8px rgba(242,140,56,0.5);
+}
+
+.user-reset-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #f28c38;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.user-reset-btn:hover {
+    background-color: #f7a65a;
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   Responsive Adjustments
+=================================*/
+@media (max-width: 480px) {
+    .user-reset-card {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .user-reset-title {
+        font-size: 20px;
+    }
+
+    .user-reset-form input, .user-reset-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+/* ===============================
+   Animation
+=================================*/
+@keyframes floatCloud{
+    0%{ transform: translateX(0);}
+    50%{ transform: translateX(15px);}
+    100%{ transform: translateX(0);}
+}
+
+@keyframes pulse{
+    0%{ transform: scale(1);}
+    50%{ transform: scale(1.1);}
+    100%{ transform: scale(1);}
+}
+
+/* ===============================
+   General
+=================================*/
+body{
+    margin:0;
+    font-family:"Tajawal", sans-serif;
+    background:#F4E9D8;
+    direction: rtl;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+/* الحاوية */
+.container{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+    position:relative;
+}
+
+/* ===============================
+   Title
+=================================*/
+h1{
+    color:#E38B29;
+    font-size:36px;
+    margin-bottom:30px;
+}
+
+/* ===============================
+   Instructions
+=================================*/
+.instructions{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size:20px;
+    margin-bottom:25px;
+}
+
+/* زر التشغيل */
+.play-btn{
+    background:#F8E6A5;
+    border:none;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    font-size:22px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.play-btn:hover{
+    background:#F4D06F;
+}
+
+/* ===============================
+   Word Card
+=================================*/
+.word-card{
+    background:#F8E6A5;
+    padding:30px 60px;
+    border-radius:20px;
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:30px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   Mic Button
+=================================*/
+.mic{
+    background:#E38B29;
+    color:white;
+    border:none;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    font-size:32px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.mic:hover{
+    background:#cf741f;
+}
+
+/* حالة التسجيل */
+.mic.recording{
+    animation:pulse 1s infinite;
+    background:#d9534f;
+}
+
+/* ===============================
+   Result
+=================================*/
+.result{
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+    min-height:30px;
+}
+
+.result.success{
+    color:#2e7d32;
+}
+
+.result.error{
+    color:#c62828;
+}
+
+/* ===============================
+   Decorative Elements
+=================================*/
+.decorative{
+    position:fixed;
+    width:140px;
+    z-index:-1;
+}
+
+.bottom-left{
+    bottom:0;
+    left:0;
+}
+
+.bottom-right{
+    bottom:0;
+    right:0;
+}
+
+/* ===============================
+   Writing Page Styled like Reading Page
+=================================*/
+.writing-page{
+    background:#F4E9D8;
+    font-family:"Tajawal", sans-serif;
+    direction:rtl;
+    margin:0;
+    overflow-x:hidden;
+}
+
+/* Header */
+.writing-page header{
+    position:relative;
+    padding:20px 0 10px;
+    text-align:center;
+}
+
+.writing-page .back{
+    position:absolute;
+    right:20px;
+    top:20px;
+    background:#F8E6A5;
+    border:none;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.writing-page .back:hover{
+    background:#F4D06F;
+}
+
+.writing-page .logo-img{
+    width:110px;
+}
+
+/* Title */
+.writing-page .page-title{
+    text-align:center;
+    font-size:36px;
+    color:#E38B29;
+    margin:20px 0 30px;
+}
+
+/* Levels */
+.writing-page .levels{
+    width:90%;
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.writing-page .level-card{
+    background:#F8E6A5;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.writing-page .level-title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.writing-page .level-options{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* النوع والحالة */
+.writing-page .level-type{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.writing-page .status{
+    padding:6px 14px;
+    border-radius:15px;
+    font-size:13px;
+}
+
+.writing-page .completed{
+    background:#d4edda;
+    color:#2e7d32;
+}
+
+.writing-page .in-progress{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.writing-page .not-started{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+/* زر الدخول */
+.writing-page .enter-btn{
+    background:#E38B29;
+    color:white;
+    border:none;
+    padding:6px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.writing-page .enter-btn:hover{
+    background:#cf741f;
+}
+
+.writing-page .enter-btn.locked{
+    background:#bbb;
+    cursor:not-allowed;
+}
+
+.writing-page .buttons{
+    margin:20px 0 25px;
+}
+
+.writing-page .girl{
+     text-align:center;
+    margin-top:30px;
+
+}
+
+.writing-page .girl img{
+    width:180px;
+}
+
+
+
+.writing-page .btn{
+    padding:12px 25px;
+    border-radius:25px;
+    border:none;
+    cursor:pointer;
+}
+
+.writing-page .btn.primary{
+    background:#E38B29;
+    color:#fff;
+}
+
+.writing-page .btn.primary:hover{
+    background:#cf741f;
+}
+
+.writing-page .btn.secondary{
+    background:#F8E6A5;
+}
+
+.writing-page .btn.secondary:hover{
+    background:#F4D06F;
+}
+/* ===============================
+   Reading Page Scoped Style
+=================================*/
+.reading-page{
+    background:#F4E9D8;
+    font-family:"Tajawal", sans-serif;
+    direction:rtl;
+    margin:0;
+    overflow-x:hidden;
+}
+
+/* Header */
+.reading-page header{
+    position:relative;
+    padding:20px 0 10px;
+    text-align:center;
+}
+
+.reading-page .logo-img{
+    width:110px;
+}
+
+/* Title */
+.reading-page .page-title{
+    text-align:center;
+    font-size:36px;
+    color:#E38B29;
+    margin:20px 0 30px;
+}
+
+/* Levels */
+.reading-page .levels{
+    width:90%;
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.reading-page .level-card{
+    background:#F8E6A5;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.reading-page .level-title{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.reading-page .level-options{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+/* النوع والحالة */
+.reading-page .level-type{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.reading-page .status{
+    padding:6px 14px;
+    border-radius:15px;
+    font-size:13px;
+}
+
+.reading-page .completed{
+    background:#d4edda;
+    color:#2e7d32;
+}
+
+.reading-page .in-progress{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.reading-page .not-started{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+/* زر الدخول */
+.reading-page .enter-btn{
+    background:#E38B29;
+    color:white;
+    border:none;
+    padding:6px 16px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reading-page .enter-btn:hover{
+    background:#cf741f;
+}
+
+.reading-page .enter-btn.locked{
+    background:#bbb;
+    cursor:not-allowed;
+}
+
+/* صورة الطفل */
+.reading-page .boy{
+    text-align:center;
+    margin-top:30px;
+}
+
+.reading-page .boy img{
+    width:180px;
+}
+
+/* أزرار أسفل الصفحة */
+.reading-page .buttons{
+    margin:30px 0 50px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.reading-page .btn{
+    padding:12px 25px;
+    border-radius:25px;
+    border:none;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reading-page .btn.primary{
+    background:#E38B29;
+    color:#fff;
+}
+
+.reading-page .btn.primary:hover{
+    background:#cf741f;
+}
+
+.reading-page .btn.secondary{
+    background:#F8E6A5;
+    color:#444;
+}
+
+.reading-page .btn.secondary:hover{
+    background:#F4D06F;
+}
+/* أزرار أسفل الصفحة */
+.reading-page .buttons{
+    margin:20px auto 40px auto; /* رفع الأزرار */
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* صورة الطفل على اليمين */
+.reading-page .boy{
+    position:fixed; /* لتثبيت الصورة */
+    bottom:80px;    /* تحريكها أعلى قليلًا */
+    right:30px;
+    width:120px;    /* تصغير حجم الصورة قليلاً */
+    z-index:10;
+}
+
+.reading-page .boy img{
+    width:100%; /* يتناسب مع الحاوية */
+}
+
+/* البوكسات */
+.reading-page .levels{
+    margin-bottom:100px; /* ترك مسافة مناسبة قبل الأزرار */
+}
+
+
+/* ===============================
+   Activities Page Style - Updated
+=================================*/
+.activities-page{
+    background:#F4E9D8;
+    font-family:"Tajawal", sans-serif;
+    direction:rtl;
+    margin:0;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* ================= HEADER ================= */
+
+.activities-page header{
+    text-align:center;
+    padding:30px 0 0;
+    position:relative;
+    z-index:1;
+}
+
+/* الولد يكون خلف الصندوق */
+.activities-page .boy{
+    text-align:center;
+    position:relative;
+    margin-bottom:-70px; /* ينزل تحت */
+    z-index:0;
+}
+
+.activities-page .boy img{
+    width:200px;
+}
+
+/* ================= YELLOW AREA ================= */
+
+.activities-page .yellow-area{
+    background:#F8E6A5;
+    border-radius:30px;
+    padding:60px 30px 40px;
+    margin:0 auto 40px;
+    width:85%;
+    max-width:1100px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    position:relative;
+    z-index:2; /* يجي فوق الولد */
+}
+
+/* ================= SECTION TITLE ================= */
+
+.activities-page .section-title{
+    text-align:center;
+    font-size:26px;
+    font-weight:800;
+    margin-bottom:35px;
+}
+
+/* ================= ACTIVITIES ================= */
+
+.activities-page .activities{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:50px;
+    flex-wrap:wrap;
+}
+
+/* تكبير الكروت + تغيير اللون */
+.activities-page .activity-card{
+    background:#a5a1e8; /* لون جديد */
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    width:230px;
+    height:280px;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transition:0.3s;
+    font-size:20px;
+    box-shadow:0 12px 25px rgba(0,0,0,0.1);
+}
+
+.activities-page .activity-card:hover{
+    transform:translateY(-8px);
+    background:#574fd6;
+}
+
+.activities-page .activity-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.activities-page .activity-text{
+    font-weight:bold;
+    font-size:22px;
+}
+
+/* ================= GIRL IMAGE LEFT ================= */
+
+.activities-page .girl{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+}
+
+.activities-page .girl img{
+    width:150px;
+}
+
+/* ================= POINTS CENTER UNDER CARDS ================= */
+
+.activities-page .points-box{
+    background:#fff3cd;
+    padding:15px 25px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:18px;
+    text-align:center;
+    margin:40px auto 0; /* تحت الكروت بالنص */
+    width:fit-content;
+    box-shadow:0 5px 12px rgba(0,0,0,0.05);
+}
+
+/* ================= BUTTON ================= */
+
+.activities-page .buttons{
+    text-align:center;
+    margin-top:25px;
+}
+
+.activities-page .btn.yellow{
+    background:#2A9D8F; /* لون جديد للتقرير */
+    color:#fff;
+    padding:14px 35px;
+    border-radius:30px;
+    font-weight:bold;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.activities-page .btn.yellow:hover{
+    background:#21867a;
+    transform:translateY(-3px);
+}
+
+/* ================= LOGO ================= */
+
+.activities-page .logo-img{
+    width:130px;          /* حجم مناسب */
+    display:block;
+    margin:0 auto;        /* بالنص */
+    margin-bottom:10px;
+    transition:0.3s;
+}
+
+.activities-page .logo-img:hover{
+    transform:scale(1.05); /* تكبير بسيط عند المرور */
+}
+/* ===============================
+   ستايلات خاصة بالصفحة
+=================================*/
+.medium-writing-page {
+    font-family: "Tajawal", sans-serif;
+    margin: 0;
+    background-color: #EDE2CC;
+    text-align: center;
+}
+
+.medium-writing-page .header {
+    position: relative;
+    padding: 20px;
+    background: #EDE2CC;
+}
+
+.medium-writing-page .back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+.medium-writing-page .page-title { color: #2B3A67; margin-top: 20px; }
+
+.medium-writing-page main { padding: 20px; }
+
+.medium-writing-page .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 50px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.medium-writing-page .level-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.medium-writing-page .done { background-color: #A2D2FF; }
+.medium-writing-page .active { background-color: #FFB703; }
+
+.medium-writing-page .words.btn {
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.medium-writing-page .girl img {
+    width: 200px;
+    margin: -20px 0 20px 0; /* margin-top سالب لتقريب الصورة للأعلى */
+}
+
+.medium-writing-page .buttons .btn { margin: 10px; padding: 10px 20px; font-size: 16px; }
+
+.medium-writing-page .logo-img{
+    width:130px;          /* حجم مناسب */
+    display:block;
+    margin:0 auto;        /* بالنص */
+    margin-bottom:10px;
+    transition:0.3s;
+}
+
+.medium-writing-page .logo-img:hover{
+    transform:scale(1.05); /* تكبير بسيط عند المرور */
+}
+/* ===============================
+   ستايلات خاصة بصفحة القراءة
+=================================*/
+/* نخلي المحتوى فوق بدون تمدد */
+.medium-reading-page main {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* مهم */
+}
+
+/* نلغي أي تمدد */
+.medium-reading-page {
+    min-height: auto !important;
+    height: auto !important;
+}
+
+/* الصورة مباشرة تحت الأزرار */
+.medium-reading-page .girl {
+    margin-top: 15px;
+}
+
+.medium-reading-page .girl img {
+    width: 160px;
+    display: block;
+}
+
+.medium-reading-page {
+    font-family: "Tajawal", sans-serif;
+    margin: 0;
+    background-color: #EDE2CC;
+    text-align: center;
+}
+
+.medium-reading-page .header {
+    position: relative;
+    padding: 20px;
+    background: #EDE2CC;
+}
+
+.medium-reading-page .back {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.medium-reading-page .logo-img { width: 100px; }
+
+.medium-reading-page .page-title { color: #2B3A67; margin-top: 20px; }
+
+
+.medium-reading-page .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 50px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.medium-reading-page .level-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.medium-reading-page .done { background-color: #A2D2FF; }
+.medium-reading-page .active { background-color: #FFB703; }
+
+.medium-reading-page .words.btn {
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+
+.medium-reading-page .buttons .btn { margin: 10px; padding: 10px 20px; font-size: 16px; }
+
+/* ===============================
+   ستايلات خاصة بصفحة الكلمات المخصصة
+=================================*/
+.custom-words-page {
+    font-family: "Tajawal", sans-serif;
+    margin: 0;
+    background-color: #F4E9D8;
+    text-align: center;
+}
+
+.custom-words-page .logo-img { width: 100px; }
+
+.custom-words-page h1 { color: #2B3A67; margin-top: 20px; }
+
+.custom-words-page .input-container {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.custom-words-page input {
+    padding: 10px;
+    width: 80%;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.custom-words-page .add-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-words-page .word-section { margin-top: 20px; }
+
+.custom-words-page .word-list {
+    list-style: none;
+    padding: 0;
+}
+
+.custom-words-page .word-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.custom-words-page .delete-btn {
+    margin-left: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 18px;
+}
+
+.custom-words-page .girl { width: 200px; margin: 20px 0; }
+/* زر بدء الاختبار في صفحة الكلمات المخصصة */
+.custom-words-page #startTestBtn {
+    display: none;           /* مخفي أولاً */
+    margin-top: 30px;        /* المسافة تحت الكلمات */
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* ===================================
+   Finish Button - Custom Words Page
+=================================== */
+
+.custom-words-page .finish-btn{
+    display: block;
+    margin: 25px auto 0; /* يخليه بالنص وتحت القائمة */
+    background: linear-gradient(135deg, #F8E6A5, #F4D27A);
+    color: #5A4A2F;
+    font-family: "Tajawal", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #D6B45C;
+    transition: all 0.2s ease;
+}
+
+.custom-words-page .finish-btn:hover{
+    transform: translateY(-2px);
+}
+
+.custom-words-page .finish-btn:active{
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #D6B45C;
+}
+
+
+/* ===============================
+   ستايل صفحة Writing3 
+=================================*/
+.writing3-page {
+    margin: 0;
+    font-family: "Tajawal", sans-serif;
+    background: #F4E9D8;
+    text-align: center;
+    direction: rtl;
+}
+
+.writing3-page .logo {
+    margin: 20px 0;
+}
+
+.writing3-page .logo-img {
+    width: 120px;
+}
+
+.writing3-page .wTitle {
+    font-size: 28px;
+    margin: 40px 0 20px;
+}
+
+.writing3-page .instruction-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.writing3-page canvas {
+    border: 2px solid #000;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.writing3-page .wButtons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.writing3-page .wBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* زر مسح */
+.writing3-page .delete {
+    background-color: #e57373;   /* أحمر هادئ */
+    color: white;
+}
+
+.writing3-page .delete:hover {
+    background-color: #d32f2f;   /* أحمر أغمق عند المرور */
+}
+
+/* زر تحقق */
+.writing3-page .check {
+    background-color: #81c784;   /* أخضر هادئ */
+    color: white;
+}
+
+.writing3-page .check:hover {
+    background-color: #388e3c;   /* أخضر أغمق عند المرور */
+}
+
+.writing3-page .feedback {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #f28c38;
+}
+
+.writing3-page .girl img {
+    width: 150px;   /* صغّرت الحجم */
+    height: auto;
+}
+
+.writing3-page .book {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    width: 100px;
+}
+/* ===============================
+   Writing 4 Page Style
+=================================*/
+
+.writing4-page {
+    margin: 0;
+    font-family: "Tajawal", sans-serif;
+    background: #F4E9D8;
+    text-align: center;
+    direction: rtl;
+}
+
+/* اللوقو */
+.writing4-page .logo {
+    margin: 20px 0;
+}
+
+.writing4-page .logo-img {
+    width: 120px;
+}
+
+
+/* العنوان */
+.writing4-page .wTitle {
+    font-size: 28px;
+    margin: 40px 0 20px;
+}
+
+/* سطر التعليمات */
+.writing4-page .instruction-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* لوحة الكلمة */
+.writing4-page .word-board {
+    font-size: 40px;
+    background: #F8E6A5;
+    padding: 15px 30px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* الكانفاس */
+.writing4-page canvas {
+    border: 2px solid #000;
+    border-radius: 10px;
+    background: #fff;
+}
+
+/* الأزرار */
+.writing4-page .wButtons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.writing4-page .wBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* زر مسح */
+.writing4-page .delete {
+    background-color: #e57373;
+    color: white;
+}
+
+.writing4-page .delete:hover {
+    background-color: #c62828;
+}
+
+/* زر تحقق */
+.writing4-page .check {
+    background-color: #81c784;
+    color: white;
+}
+
+.writing4-page .check:hover {
+    background-color: #2e7d32;
+}
+
+/* الفيدباك */
+.writing4-page .feedback {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #f28c38;
+}
+
+/* صورة البنت */
+.writing4-page .girl {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+}
+
+.writing4-page .girl img {
+    width: 150px;
+}
+
+/* الكتاب */
+.writing4-page .book {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    width: 100px;
+}
+/* ===============================
+   Writing 2 Page Style
+=================================*/
+
+.writing2-page{
+    background:#F4E9D8;
+    font-family:"Tajawal", sans-serif;
+    margin:0;
+    padding:0;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+/* الشعار */
+.writing2-page .logo{
+    margin-top:20px;
+}
+
+.writing2-page .logo-img{
+    width:120px;
+}
+
+/* العنوان */
+.writing2-page .wTitle{
+    font-size:32px;
+    color:#E67E22;
+    margin:20px 0 10px;
+}
+
+/* التعليمات */
+.writing2-page .instruction-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.writing2-page .instruction-row p{
+    font-size:18px;
+    margin:0;
+}
+
+/* زر الصوت */
+.writing2-page .play-btn{
+    background:#F8E6A5;
+    border:none;
+    padding:8px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    transition:.3s;
+}
+
+.writing2-page .play-btn:hover{
+    background:#F5D98C;
+    transform:scale(1.05);
+}
+
+/* لوحة الكلمة */
+.writing2-page .word-board{
+    background:#F8E6A5;
+    width:180px;
+    margin:10px auto 20px;
+    padding:10px;
+    border-radius:12px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* منطقة الكتابة */
+.writing2-page .canvas-wrapper{
+    position:relative;
+    width:350px;
+    height:180px;
+    margin:0 auto 20px;
+}
+
+/* SVG يبقى بالخلف */
+.writing2-page .canvas-wrapper svg{
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+/* الكانفس فوقه */
+.writing2-page canvas{
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+/* الأزرار */
+.writing2-page .wButtons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-bottom:15px;
+}
+
+.writing2-page .wBtn{
+    padding:10px 25px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+/* زر مسح */
+.writing2-page .delete{
+    background:#FF6B6B;
+    color:white;
+}
+
+.writing2-page .delete:hover{
+    background:#e55353;
+    transform:scale(1.05);
+}
+
+/* زر تحقق */
+.writing2-page .check{
+    background:#4CAF50;
+    color:white;
+}
+
+.writing2-page .check:hover{
+    background:#3e9442;
+    transform:scale(1.05);
+}
+
+/* رسالة النتيجة */
+.writing2-page .feedback{
+    font-size:18px;
+    margin-top:10px;
+    min-height:25px;
+    color:#333;
+}
+
+.writing2-page .boy{
+    position:fixed;
+    bottom:0;
+    left:30px;
+}
+
+.writing2-page .boy img{
+    width:220px;   /* حجم مناسب */
+    height:auto;
+}
+
+.writing2-page .book{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120px;
+}
+/* اللوحة البيضاء للكتابة */
+.writing2-page .canvas-wrapper{
+    position:relative;
+    width:350px;
+    height:180px;
+    margin:40px auto;
+    background:#ffffff;          /* اللوحة البيضاء */
+    border-radius:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+/* الحروف المنقطة */
+.writing2-page .canvas-wrapper svg{
+    position:absolute;
+    z-index:1;
+}
+
+/* الكتابة فوقها */
+.writing2-page canvas{
+    position:absolute;
+    z-index:2;
+}
+
+
+
+/* =========================
+   Interactive Activity - Web App Style
+   ========================= */
+
+
+/* الحاوية الرئيسية */
+.interactive-activity {
+    max-width: 1000px;
+    margin: 60px auto;
+    background: #FDF6E9;
+    border-radius: 30px;
+    padding: 50px 60px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* العناوين */
+.interactive-activity h1 {
+    color: #E58E26;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.interactive-activity h2 {
+    color: #2E3A63;
+    font-size: 22px;
+    margin-bottom: 50px;
+}
+
+/* توزيع العناصر يمين ويسار */
+.interactive-activity .match-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 50px;
+    column-gap: 200px;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 40px;
+}
+
+/* SVG للخطوط */
+.interactive-activity #lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* عناصر المطابقة */
+.interactive-activity .match-item {
+    width: 180px;
+    height: 150px;
+    background: white;
+    border: none;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.interactive-activity .match-item:hover {
+    transform: scale(1.08);
+}
+
+.interactive-activity .match-item img {
+    max-width: 85%;
+    max-height: 85%;
+}
+
+/* النتيجة */
+.interactive-activity .result {
+    font-size: 28px;
+    font-weight: bold;
+    min-height: 40px;
+    margin-top: 20px;
+}
+
+.interactive-activity .correct {
+    color: #27AE60;
+}
+
+.interactive-activity .wrong {
+    color: #E74C3C;
+}
+
+/* زر إعادة المحاولة */
+.interactive-activity .retry-btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #2E3A63;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: none;
+}
+
+.interactive-activity .retry-btn:hover {
+    background-color: #1d2747;
+    transform: scale(1.05);
+}
+
+/* صورة الطفل */
+.interactive-activity .boy img {
+    width: 170px;
+    margin-top: 40px;
+}
+
+/* الكتاب */
+.interactive-activity .book {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    width: 80px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.interactive-activity .book:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .interactive-activity {
+        padding: 30px;
+    }
+
+    .interactive-activity .match-container {
+        column-gap: 80px;
+    }
+
+    .interactive-activity .match-item {
+        width: 140px;
+        height: 120px;
+    }
+    }
+
+/* ==========================
+   Custom Test Page Styles
+=========================== */
+.custom-test-page {
+    font-family: "Tajawal", sans-serif;
+    text-align: center;
+    padding: 20px;
+    background: #FDF6E3;
+}
+
+.custom-test-page h1{
+    font-size: 30px;
+    margin-bottom: 30px;
+    color:#E8A54B;
+}
+
+.custom-test-page .word-box{
+    font-size: 50px;
+    font-weight: bold;
+    color:#2E3A63;
+    background:#FFF8DC;
+    border:2px solid #E8A54B;
+    border-radius: 15px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.custom-test-page button{
+    font-size: 20px;
+    padding: 12px 25px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    margin: 5px;
+    transition: transform 0.1s;
+    background:#FFF;
+    color:#2E3A63;
+    border:2px solid #2E3A63;
+}
+
+.custom-test-page button:hover{
+    transform: scale(1.05);
+}
+
+.custom-test-page .reading-btn{
+    background:#FFD700;
+    color:#2E3A63;
+    border:2px solid #FFD700;
+}
+
+.custom-test-page .writing-btn{
+    background:#2E86AB;
+    color:#FFF;
+}
+
+.custom-test-page .home-btn{
+    background:#FFF;
+    color:#2E3A63;
+    border:2px solid #2E3A63;
+    font-weight:bold;
+    padding: 12px 30px;
+}
+
+.custom-test-page .wButtons{
+    margin-top: 15px;
+}
+
+.custom-test-page .canvas-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.custom-test-page canvas{
+    border:2px solid #E8A54B;
+    border-radius:12px;
+    background:#f4f3f2;
+}
+
+.custom-test-page .result{
+    font-size: 26px;
+    font-weight: bold;
+    margin-top:30px;
+    color:#E85A4F;
+}
+
+.custom-test-page .feedback{
+    font-size: 22px;
+    margin-top:15px;
+    font-weight:bold;
+}
+/* الصفحة كاملة */
+
+.edit-profile-page{
+width:100%;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+background:#e8ddcb;
+font-family:"Tajawal",sans-serif;
+}
+
+/* اللوقو */
+
+.edit-profile-page .edit-logo{
+width:110px;
+margin-bottom:20px;
+}
+
+/* العنوان */
+
+.edit-profile-page .edit-title{
+color:#d47a3a;
+font-size:22px;
+margin-bottom:20px;
+}
+
+/* صورة المستخدم */
+
+.edit-profile-page .edit-avatar img{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#7fb9db;
+padding:10px;
+margin-bottom:20px;
+}
+
+/* الفورم */
+
+.edit-profile-page .edit-form{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:350px;
+}
+
+/* الحقول */
+
+.edit-profile-page .edit-input{
+width:100%;
+padding:14px;
+margin:8px 0;
+border:none;
+border-radius:30px;
+background:#e7d39a;
+font-size:14px;
+text-align:right;
+}
+
+/* الأزرار */
+
+.edit-profile-page .edit-buttons{
+display:flex;
+gap:12px;
+margin-top:15px;
+}
+
+/* زر الحفظ */
+
+.edit-profile-page .save-btn{
+background:#5aaac1;
+color:white;
+border:none;
+padding:10px 22px;
+border-radius:12px;
+cursor:pointer;
+}
+
+/* زر الإلغاء */
+
+.edit-profile-page .edit-cancel{
+background:#9cb9c7;
+color:white;
+border:none;
+padding:10px 22px;
+border-radius:12px;
+cursor:pointer;
+}
+
+/* hover */
+
+.edit-profile-page .edit-save:hover{
+background:#4a9db4;
+}
+
+.edit-profile-page .edit-cancel:hover{
+background:#86a9b8;
+}

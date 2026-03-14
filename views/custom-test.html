@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار الكلمات - سبورة</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="custom-test-page">
+
+<h1>اختبار الكلمات</h1>
+
+<div id="testArea"></div>
+<div id="feedback" class="feedback"></div>
+
+<div class="canvas-wrapper" id="canvasWrapper">
+    <canvas id="board" width="350" height="180"></canvas>
+</div>
+<br>
+<div id="buttonsContainer">
+    <button class="btn primary" onclick="clearBoard()">مسح السبورة</button>
+    <button class="btn primary" onclick="checkBoard()">تحقق من الكتابة</button>
+    <button class="btn primary" onclick="startVoice()">سجل صوتك 📢</button>
+</div>
+
+<div class="result" id="result"></div>
+
+<script>
+let words = JSON.parse(localStorage.getItem("customWords")) || [];
+let currentIndex = 0;
+let score = 0;
+const testArea = document.getElementById("testArea");
+const feedback = document.getElementById("feedback");
+const result = document.getElementById("result");
+const canvasWrapper = document.getElementById("canvasWrapper");
+const buttonsContainer = document.getElementById("buttonsContainer");
+
+// Canvas setup
+const canvas = document.getElementById("board");
+const ctx = canvas.getContext("2d");
+let drawing = false;
+let strokes = 0;
+
+canvas.addEventListener("pointerdown", () => drawing = true);
+canvas.addEventListener("pointerup", () => drawing = false);
+canvas.addEventListener("pointermove", e => {
+    if(!drawing) return;
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.lineTo(e.offsetX + 0.1, e.offsetY + 0.1);
+    ctx.stroke();
+    strokes++;
+});
+
+// بدء الاختبار
+if(words.length === 0){
+    testArea.innerHTML = "<p>لا توجد كلمات مضافة من الوالدين</p>";
+}else{
+    startTest();
+}
+
+function startTest(){
+    showWord();
+}
+
+function showWord(){
+    strokes = 0;
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    feedback.textContent = "";
+    testArea.innerHTML = `
+        <p>اكتب الكلمة على السبورة:</p>
+        <div class="word-box">${words[currentIndex]}</div>
+        <button class="btn primary" onclick="speakWord()">🔊 استمع للكلمة</button>
+    `;
+}
+
+function speakWord(){
+    const msg = new SpeechSynthesisUtterance(words[currentIndex]);
+    msg.lang = "ar-SA";
+    msg.rate = 0.85;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+function clearBoard(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    strokes = 0;
+    feedback.textContent = "";
+}
+
+function checkBoard(){
+    if(strokes >= 50){
+        score++;
+        feedback.textContent = "✅ أحسنت!";
+        feedback.style.color = "#28A745";
+    }else{
+        feedback.textContent = "❌ حاول تتبع الحروف بشكل أفضل";
+        feedback.style.color = "#E85A4F";
+        return;
+    }
+
+    currentIndex++;
+    if(currentIndex < words.length){
+        showWord();
+    }else{
+        finishTest();
+    }
+}
+
+function startVoice(){
+    if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
+        alert("هذا المتصفح لا يدعم تسجيل الصوت");
+        return;
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'ar-SA';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    recognition.onresult = function(event){
+        const spoken = event.results[0][0].transcript.trim();
+        if(spoken === words[currentIndex]){
+            feedback.textContent = "✅ تسجيلك صحيح!";
+            feedback.style.color = "#28A745";
+            score++;
+        } else {
+            feedback.textContent = `❌ سمعت "${spoken}" حاول مرة أخرى`;
+            feedback.style.color = "#E85A4F";
+        }
+    }
+
+    recognition.onerror = function(event){
+        feedback.textContent = "حدث خطأ في التسجيل";
+        feedback.style.color = "#E85A4F";
+    }
+}
+function finishTest(){
+    // إخفاء السبورة والأزرار
+    canvasWrapper.style.display = "none";
+    buttonsContainer.style.display = "none";
+    testArea.style.display = "none";
+    feedback.style.display = "none";
+
+    // عرض النتيجة مع صورة احتفالية في الوسط
+    result.innerHTML = `
+        <div class="celebration" style="text-align:center; margin-top:50px;">
+            <img src="assets/images/celebration.png" alt="تهانينا" style="width:300px; display:block; margin:0 auto;">
+            <h2 style="margin-top:20px;">🎉 انتهى الاختبار 🎉</h2>
+            <p style="font-size:20px;">نتيجتك: ${score} من ${words.length}</p>
+            <button class="btn primary" onclick="goHome()" style="margin-top:20px;">العودة للصفحة الرئيسية</button>
+        </div>
+    `;
+}
+function goHome(){
+    window.location.href = "home.html";
+}
+</script>
+
+</body>
+</html>

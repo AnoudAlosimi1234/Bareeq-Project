@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختر شخصية</title>
+
+<link rel="stylesheet" href="assets/css/main.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="choose-character">
+
+<!-- Clouds and Sun -->
+<div class="cloud cloud1">☁️</div>
+<div class="cloud cloud2">☁️</div>
+<div class="sun">🌞</div>
+
+<div class="character-page">
+
+    <div class="page-header">
+        <a href="home.html" class="home-btn">🏠</a>
+        <h2>اختر شخصية نتعلم معها</h2>
+        <p>من منهم سيكون صديقك المفضل؟</p>
+    </div>
+
+    <!-- عرض نقاط الطفل -->
+    <div class="user-points">
+        نقاطك: <span id="points-value">800</span>
+    </div>
+
+    <div class="characters-list">
+
+        <!-- لميس (مفتوحة) -->
+        <div class="character-item" data-points="0">
+            <button class="name-btn">لميس</button>
+            <img src="assets/images/char1.png" alt="لميس">
+            <div class="points-container open">متاحة</div>
+        </div>
+
+        <!-- عبدالله (750 نقطة) -->
+        <div class="character-item locked" data-points="750">
+            <button class="name-btn">عبدالله</button>
+            <img src="assets/images/char2.png" alt="عبدالله">
+            <div class="points-container">
+                <span class="points-number">750</span>
+                <span class="points-text">نقطة</span>
+            </div>
+        </div>
+
+        <!-- جنى (1500 نقطة) -->
+        <div class="character-item locked" data-points="1500">
+            <button class="name-btn">جنى</button>
+            <img src="assets/images/char3.png" alt="جنى">
+            <div class="points-container">
+                <span class="points-number">1500</span>
+                <span class="points-text">نقطة</span>
+            </div>
+        </div>
+
+        <!-- سليمان (مفتوحة) -->
+        <div class="character-item" data-points="0">
+            <button class="name-btn">سليمان</button>
+            <img src="assets/images/char5.png" alt="سليمان">
+            <div class="points-container open">متاحة</div>
+        </div>
+
+        <!-- لولو (1000 نقطة) -->
+        <div class="character-item locked" data-points="1000">
+            <button class="name-btn">لولو</button>
+            <img src="assets/images/char6.png" alt="لولو">
+            <div class="points-container">
+                <span class="points-number">1000</span>
+                <span class="points-text">نقطة</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const buttons = document.querySelectorAll(".name-btn");
+const nextBtn = document.getElementById("nextBtn");
+
+let userPoints = 800; // تقدرين تربطينه بنظامك لاحقاً
+document.getElementById("points-value").textContent = userPoints;
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        const parent = btn.parentElement;
+        const requiredPoints = parseInt(parent.dataset.points);
+
+        if(requiredPoints > userPoints){
+            alert("تحتاج نقاط أكثر لفتح هذه الشخصية ⭐");
+            return;
+        }
+
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        localStorage.setItem("selectedCharacter", btn.textContent);
+
+        nextBtn.disabled = false;
+    });
+});
+
+nextBtn.addEventListener("click", () => {
+    window.location.href = "home.html";
+});
+
+window.addEventListener("load", function () {
+
+    const text = "اختر شخصية نتعلم معها. من منهم سيكون صديقك المفضل؟";
+
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "ar-SA";
+    speech.rate = 0.9;
+    speech.pitch = 1;
+
+    window.speechSynthesis.speak(speech);
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبار الكلمات</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/custom-test.css">
+</head>
+
+<body class="custom-test-page">
+
+<h1>اختبار الكلمات</h1>
+
+<div id="testArea"></div>
+<div class="feedback" id="feedback"></div>
+<div class="result" id="result"></div>
+
+<script>
+// جلب الكلمات المضافة من الوالدين
+let words = JSON.parse(localStorage.getItem("parentWords")) || [];
+let currentIndex = 0;
+let score = 0;
+let mode = "reading"; // reading -> writing
+
+const testArea = document.getElementById("testArea");
+const feedback = document.getElementById("feedback");
+const result = document.getElementById("result");
+
+// لو ما فيه كلمات
+if(words.length === 0){
+    testArea.innerHTML = "<p>لا توجد كلمات مضافة من الوالدين</p>";
+}else{
+    startTest();
+}
+
+function startTest(){
+    showReading();
+}
+
+// -------------------
+// 📖 اختبار القراءة
+// -------------------
+function showReading(){
+    mode = "reading";
+    feedback.textContent = "";
+
+    testArea.innerHTML = `
+        <div class="word-box">${words[currentIndex]}</div>
+        <button class="reading-btn" onclick="speakWord()">🔊 استمع للكلمة</button>
+        <br>
+        <button class="reading-btn" onclick="recordReading()">قرأت الكلمة</button>
+    `;
+}
+
+function speakWord(){
+    const msg = new SpeechSynthesisUtterance(words[currentIndex]);
+    msg.lang = "ar-SA";
+    msg.rate = 0.85;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(msg);
+}
+
+// تسجيل قراءة الطفل (يمكن الربط بالباك إند)
+function recordReading(){
+    console.log("تم تسجيل قراءة: " + words[currentIndex]);
+    // مثال إرسال للباك إند:
+    // fetch("/api/recordReading", {...})
+    
+    currentIndex++;
+    if(currentIndex < words.length){
+        showReading();
+    }else{
+        currentIndex = 0;
+        showWriting();
+    }
+}
+
+// -------------------
+// ✍ اختبار الكتابة باللوح
+// -------------------
+function showWriting(){
+    mode = "writing";
+    feedback.textContent = "";
+
+    testArea.innerHTML = `
+        <p>اكتب الكلمة التي تسمعها على اللوح</p>
+        <button class="writing-btn" onclick="speakWord()">🔊 استمع</button>
+        <div class="canvas-wrapper">
+            <canvas id="draw" width="350" height="150" aria-label="مساحة الكتابة"></canvas>
+        </div>
+        <div class="wButtons">
+            <button class="wBtn delete" onclick="clearCanvas()">مسح</button>
+            <button class="wBtn check" onclick="checkCanvas()">تحقق</button>
+        </div>
+    `;
+
+    initCanvas();
+}
+
+let canvas, ctx, drawing=false, strokes=0;
+
+function initCanvas(){
+    canvas = document.getElementById("draw");
+    ctx = canvas.getContext("2d");
+    strokes = 0;
+
+    canvas.addEventListener("pointerdown", ()=> drawing=true);
+    canvas.addEventListener("pointerup", ()=> drawing=false);
+    canvas.addEventListener("pointermove", draw);
+}
+
+function draw(e){
+    if(!drawing) return;
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#2E3A63";
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX,e.offsetY);
+    ctx.lineTo(e.offsetX+0.1,e.offsetY+0.1);
+    ctx.stroke();
+    strokes++;
+}
+
+function clearCanvas(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    strokes=0;
+    feedback.textContent = "";
+}
+
+// التقييم الجزئي: مجرد عدد السكتشات
+function checkCanvas(){
+    if(strokes > 200){
+        score++;
+        feedback.textContent = "✅ أحسنت!";
+        feedback.style.color="#28A745";
+    }else{
+        feedback.textContent = "❌ حاول تتبع الحروف بدقة أكبر";
+        feedback.style.color="#E85A4F";
+        return;
+    }
+
+    setTimeout(()=>{
+        currentIndex++;
+        if(currentIndex < words.length){
+            showWriting();
+        }else{
+            finishTest();
+        }
+    }, 1000);
+}
+
+// -------------------
+// 📊 النتيجة
+// -------------------
+function finishTest(){
+    testArea.innerHTML = "";
+    feedback.textContent = "";
+    result.innerHTML = `
+        انتهى الاختبار 🎉 <br>
+        نتيجتك: ${score} من ${words.length} كلمات
+        <br><br>
+        <button class="writing-btn home-btn" onclick="goHome()">العودة إلى الصفحة الرئيسية</button>
+    `;
+
+    setTimeout(goHome, 5000);
+}
+
+function goHome(){
+    window.location.href="home.html"; 
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدارة الأنشطة</title>
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<main class="page manage-activities">
+
+<div class="page-title">إدارة الأنشطة</div>
+
+<div id="activities">
+
+    <!-- نشاط القراءة -->
+    <div class="section">
+        <div class="section-title">نشاط القراءة</div>
+
+        <div class="card">
+            <input class="search-bar" placeholder="ابحث عن مستوى / رقم 🔍" onkeyup="searchLevels(this)">
+<div class="search-results" style="background:white; border-radius:10px; padding:10px; display:none; margin-top:5px;"></div>
+            <img src="book2.jpg" class="activity-img" alt="كتاب مفتوح">
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="deleteCard(this)">حذف</button>
+            <button class="btn" onclick="editCard(this)">تعديل</button>
+        </div>
+    </div>
+
+    <!-- نشاط الكتابة -->
+    <div class="section">
+        <div class="section-title">نشاط الكتابة</div>
+
+        <div class="card">
+            <input class="search-bar" placeholder="ابحث عن مستوى / رقم 🔍" onkeyup="searchLevels(this)">
+<div class="search-results" style="background:white; border-radius:10px; padding:10px; display:none; margin-top:5px;"></div>
+            <img src="pencil.jpg" class="activity-img" alt="قلم">
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="deleteCard(this)">حذف</button>
+            <button class="btn" onclick="editCard(this)">تعديل</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- إضافة نشاط -->
+<div class="add-section">
+    <button class="add-btn" onclick="addNewCard()">＋ إضافة نشاط جديد</button>
+</div>
+</main>
+
+<div id="mainModal" class="modal">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+        closeDelete(); 
+    }
+});
+
+let currentSection = null;
+
+/* فتح مودال التعديل */
+function editCard(btn){
+    currentSection = btn.closest(".section");
+
+    let title = currentSection.querySelector(".section-title").textContent.trim();
+
+    document.getElementById("modalContent").innerHTML = `
+        <h3>تعديل النشاط</h3>
+
+        <label style="display:block;text-align:right;">العنوان:</label>
+        <input id="editTitle" value="${title}">
+
+        <label style="display:block;text-align:right;">الصورة:</label>
+        <input type="file" id="editImage">
+
+       <div class="modal-buttons">
+            <button class="cancel modal-button" onclick="closeModal()">إلغاء</button>
+            <button class="confirm modal-button" onclick="saveEdit()">حفظ</button>
+        </div>
+    `;
+
+    openModal();
+}
+
+/* حفظ التعديل */
+function saveEdit(){
+
+    if(currentSection){
+
+        let newTitle = document.getElementById("editTitle").value;
+        currentSection.querySelector(".section-title").textContent = newTitle;
+
+        let fileInput = document.getElementById("editImage");
+        if(fileInput.files.length > 0){
+            let img = currentSection.querySelector(".activity-img");
+            img.src = URL.createObjectURL(fileInput.files[0]);
+        }
+    }
+
+    closeModal();
+}
+
+/* فتح مودال الحذف */
+let deleteTarget = null;
+
+function deleteCard(btn){
+    deleteTarget = btn.closest(".section");
+
+    document.getElementById("modalContent").innerHTML = `
+        <h3>أتأكد من الحذف؟</h3>
+
+        <div class="modal-buttons">
+            <button class="cancel modal-button" onclick="closeModal()">لا</button>
+            <button class="confirm modal-button" onclick="confirmDelete()">نعم</button>
+        </div>
+    `;
+
+    openModal();
+}
+
+function confirmDelete(){
+    if(deleteTarget){
+        deleteTarget.remove();
+    }
+    closeModal();
+}
+
+/* فتح وإغلاق المودال */
+
+function openModal(){
+    document.getElementById("mainModal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("mainModal").style.display="none";
+}
+/* إضافة نشاط جديد */
+function addNewCard(){
+    const html = `
+    <div class="section">
+        <div class="section-title">نشاط جديد</div>
+
+        <div class="card">
+            <input class="search-bar" placeholder="ابحث عن مستوى / رقم 🔍">
+            <img src="placeholder.png" class="activity-img">
+            <p class="desc">وصف جديد...</p>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="deleteCard(this)">حذف</button>
+            <button class="btn" onclick="editCard(this)">تعديل</button>
+        </div>
+    </div>`;
+
+    document.getElementById("activities").insertAdjacentHTML("beforeend", html);
+}
+
+const levels = [
+    "المستوى 1",
+    "المستوى 2",
+    "المستوى 3",
+    "المستوى 4",
+    "المستوى 5",
+    "المستوى 6",
+    "رقم 10",
+    "رقم 12",
+    "رقم 20"
+];
+
+/* البحث */
+function searchLevels(input){
+    const keyword = input.value.trim();
+    const resultBox = input.parentElement.querySelector(".search-results");
+
+    if(keyword === ""){
+        resultBox.style.display = "none";
+
+        // عرض كل الأنشطة لما يرجع البحث فاضي
+        showAllSections();
+        return;
+    }
+
+    const filtered = levels.filter(level => level.includes(keyword));
+
+    if(filtered.length === 0){
+        resultBox.innerHTML = `<div class="result-item">لا يوجد نتائج</div>`;
+    } else {
+        resultBox.innerHTML = filtered
+            .map(level =>
+                `<div class="result-item" onclick="chooseLevel(this, '${level}')">${level}</div>`
+            )
+            .join("");
+    }
+
+    resultBox.style.display = "block";
+}
+
+/* عند الضغط على مستوى */
+function chooseLevel(div, selectedLevel){
+    const input = div.closest(".card").querySelector(".search-bar");
+    const resultBox = div.parentElement;
+
+    // نضيف تأثير لون عند الضغط
+    div.style.background = "#FFD08A";
+    setTimeout(() => { div.style.background = ""; }, 200);
+
+    input.value = selectedLevel;
+    resultBox.style.display = "none";
+
+    // فلترة الأنشطة
+    filterByLevel(selectedLevel);
+}
+
+/* فلترة الأنشطة حسب المستوى */
+function filterByLevel(level){
+    const sections = document.querySelectorAll(".section");
+
+    sections.forEach(sec => {
+        let title = sec.querySelector(".section-title").textContent;
+
+        // لو عنوان النشاط يحتوي المستوى
+        if(title.includes(level)){
+            sec.style.display = "block";
+        } else {
+            sec.style.display = "none";
+        }
+    });
+}
+
+/* إظهار كل الأنشطة */
+function showAllSections(){
+    document.querySelectorAll(".section").forEach(sec => {
+        sec.style.display = "block";
+    });
+}
+
+
+</script>
+
+</body>
+</html>

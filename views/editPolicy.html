@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تعديل السياسات</title>
+
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div id="mainView">
+<h1>تعديل السياسات</h1>
+
+<div id="policyList"></div>
+
+<button class="add-btn" onclick="addPolicy()">+ إضافة سياسة جديدة</button>
+</div>
+
+<div class="edit-screen" id="editScreen">
+<h1 id="editTitle"></h1> 
+
+<div class="edit-box" 
+     id="editBox"
+     contenteditable="true"
+     role="textbox"
+     aria-multiline="true"
+     aria-label="محتوى السياسة"></div> 
+
+<div class="action-row">
+    <button class="btn" onclick="savePolicy()">حفظ التعديلات</button>
+</div>
+
+</div>
+
+<div id="mainModal" class="modal">
+    <div class="modal-content" id="modalContent"></div>
+</div>
+
+
+<script>
+let policies = [ // array to hold policies
+    {name:"سياسة الخصوصية", content:""}, // content could be edited later
+    {name:"سياسة الاستخدام", content:""},
+    {name:"سياسة المحتوى", content:""},
+    {name:"سياسة البيانات", content:""}
+];
+
+let currentIndex = null; //يخزن رقم السياسة الحالية الي تتعدل أو تنحذف 
+let lastFocusedElement = null; //for accessibility, to return focus after closing modals
+
+function renderPolicies(){ 
+    const list = document.getElementById("policyList");
+    list.innerHTML=""; // clear previous content
+    policies.forEach((policy,index)=>{
+        const card=document.createElement("div");
+        card.className="policy-card";
+        card.innerHTML=`
+        <span class="policy-name">${policy.name}</span>
+        <div class="card-actions">
+            <button class="edit-btn" onclick="editPolicy(${index})">تعديل</button>
+            <button class="delete-btn" onclick="openDelete(${index})">🗑</button>
+        </div>`;
+        list.appendChild(card);
+    });
+}
+
+function editPolicy(index){ 
+    currentIndex=index; //تنقلنا من الشاشة الرئيسية إلى شاشة التعديل
+    document.getElementById("mainView").style.display="none";
+    document.getElementById("editScreen").style.display="block";
+    document.getElementById("editTitle").innerText=policies[index].name;
+    document.getElementById("editBox").innerHTML=policies[index].content;
+}
+
+function savePolicy(){
+    policies[currentIndex].content=document.getElementById("editBox").innerHTML;
+    document.getElementById("editScreen").style.display="none";
+    document.getElementById("mainView").style.display="block";
+    renderPolicies();
+}
+
+function addPolicy(){
+    const name=prompt("أدخل اسم السياسة:");
+    if(name){
+        policies.push({name:name, content:""});
+        renderPolicies();
+    }
+}
+function openModal(){
+    document.getElementById("mainModal").style.display = "flex";
+}
+
+function closeModal(){
+    document.getElementById("mainModal").style.display = "none";
+}
+
+function openDelete(index){
+
+    currentIndex=index;
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <h3>أتأكد من الحذف؟</h3>
+
+        <div class="modal-buttons">
+            <button class="cancel modal-button" onclick="closeModal()">لا</button>
+            <button class="confirm modal-button" onclick="confirmDelete()">نعم</button>
+        </div>
+
+    `;
+
+    openModal();
+
+}
+
+function confirmDelete(){
+    policies.splice(currentIndex,1);
+    closeModal();
+    renderPolicies();
+}
+
+function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+closeModal();    }
+});
+
+renderPolicies();
+</script>
+
+</body>
+</html>

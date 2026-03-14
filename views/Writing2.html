@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel="stylesheet" href="assets/css/main.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تحبير</title>
+</head>
+
+<body class="writing2-page">
+
+<div class="logo">
+    <img src="assets/images/logo.png" alt="شعار بريق" class="logo-img">
+</div>
+
+<div class="cloud cloud1">☁️</div>
+<div class="cloud cloud2">☁️</div>
+<div class="sun">🌞</div>
+
+<h1 class="wTitle">النشاط الاول</h1>
+
+<div class="instruction-row">
+<p>انظر إلى الكلمة التالية ثم حبرها</p>
+<button class="play-btn" onclick="speakQ()" aria-label="تشغيل السؤال">▶</button>
+</div>
+
+<div class="word-board" aria-label="الكلمة المطلوبة كتابتها">
+    أم
+</div>
+
+<div class="canvas-wrapper">
+
+<!-- الحروف المنقطة -->
+<svg width="350" height="180" aria-hidden="true">
+<text x="50%" y="60%"
+text-anchor="middle"
+dominant-baseline="middle"
+font-size="70"
+font-family="Tajawal"
+fill="none"
+stroke="#bbb"
+stroke-width="2"
+stroke-dasharray="6 6">
+أم
+</text>
+</svg>
+
+<canvas id="draw" width="350" height="180" aria-label="مساحة الكتابة"></canvas>
+
+</div>
+
+<div class="wButtons">
+<button class="wBtn delete" onclick="clearCanvas()">مسح</button>
+<button class="wBtn check" onclick="checkTrace()">تحقق</button>
+</div>
+
+<div id="feedback" class="feedback" aria-live="polite"></div>
+
+<div class="boy">
+ <img src="assets/images/A boy-writing3.png" alt="طفل يفكر أثناء الكتابة">
+</div>
+
+<img src="assets/images/A book.png" class="book" alt="" aria-hidden="true">
+
+<script>
+
+/* ======= تهيئة محرك الصوت (مهم للآيفون) ======= */
+document.addEventListener("click", () => {
+    speechSynthesis.resume();
+});
+
+/* ======= الصوت ======= */
+
+function speakText(text){
+    if ('speechSynthesis' in window) {
+        speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "ar-SA";
+        utter.rate = 0.9;
+        utter.pitch = 1;
+        speechSynthesis.speak(utter);
+    }
+}
+
+function speakQ(){
+    speakText("انظر إلى الكلمة التالية ثم حبرها. أم");
+}
+
+/* ======= الكتابة ======= */
+
+const canvas=document.getElementById("draw");
+const ctx=canvas.getContext("2d");
+let drawing=false;
+let strokes=0;
+
+canvas.addEventListener("pointerdown",()=>{
+    drawing=true;
+    speakText("أم"); // ينطق الكلمة عند بداية الكتابة
+});
+
+canvas.addEventListener("pointerup",()=>drawing=false);
+
+canvas.addEventListener("pointermove",(e)=>{
+    if(!drawing) return;
+    ctx.lineWidth=4;
+    ctx.lineCap="round";
+    ctx.strokeStyle="#000";
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX,e.offsetY);
+    ctx.lineTo(e.offsetX+0.1,e.offsetY+0.1);
+    ctx.stroke();
+    strokes++;
+});
+
+function clearCanvas(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    strokes=0;
+    document.getElementById("feedback").textContent="";
+}
+
+/* ======= التحقق ======= */
+function checkTrace(){
+    if(strokes > 200){  // ناجح تمام
+        document.getElementById("feedback").textContent = "أحسنت!";
+        speakText("أحسنت");
+        setTimeout(()=>window.location.href="Writing3.html", 1500);
+    } else if(strokes > 100){  // قريب
+        document.getElementById("feedback").textContent = "حسنًا، اقتربت!";
+        speakText("حسنًا، اقتربت");
+        setTimeout(()=>window.location.href="Writing3.html", 1500); // ينقله للصفحة التالية برضه
+    } else { // ضعيف
+        document.getElementById("feedback").textContent = "حاول تتبع الحروف بدقة أكبر";
+        speakText("حاول مرة أخرى");
+    }
+}
+
+
+</script>
+
+</body>
+</html>

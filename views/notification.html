@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إشعار نشاط القراءة - بريق</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="page page-notification">
+
+    <!-- Decorative Elements -->
+    <div class="decor-sun" aria-hidden="true">🌞</div>
+    <div class="decor-cloud decor-cloud--left" aria-hidden="true">☁️</div>
+    <div class="decor-cloud decor-cloud--right" aria-hidden="true">☁️</div>
+
+    <!-- Notification Card Section -->
+    <section class="page-content notification-card"
+             role="region"
+             aria-labelledby="notification-title">
+
+        <div class="notification-body">
+
+            <img src="assets/images/girl4.png"
+                 alt="طفلة تمسك ساعة للتذكير بموعد نشاط القراءة"
+                 class="notification-image">
+
+            <div class="notification-text">
+                حان وقت<br>
+                نشاط القراءة
+            </div>
+
+        </div>
+
+    </section>
+    <script>
+setTimeout(function() {
+    const card = document.querySelector(".notification-card");
+    card.style.opacity = "0";
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 500);
+}, 3000);
+</script>
+
+</body>
+</html>

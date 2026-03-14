@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>عرض تقدم المستخدمين</title>
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+
+<main class="page">
+
+<h2 class="page-title">عرض تقدم المستخدمين</h2>
+<div class="date-range">1 إلى 7 نوفمبر</div>
+
+<!-- الكروت -->
+<div class="cards">
+    <div class="card"><div class="num">150</div><div>مستخدم</div></div>
+    <div class="card yellow"><div class="num">75%</div><div>متوسط الأداء</div></div>
+    <div class="card"><div class="num">12</div><div>تقرير</div></div>
+</div>
+
+<!-- الفلاتر -->
+<div class="filters">
+
+    <!-- فلتر الأنشطة -->
+    <div class="dropdown">
+        <button id="activityBtn" class="btn-select" onclick="toggleMenu('menu1', this)">
+            جميع الأنشطة
+            <span class="arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </span>
+        </button>
+
+        <div id="menu1" class="dropdown-menu">
+            <div onclick="selectActivity('جميع الأنشطة')">جميع الأنشطة</div>
+            <div onclick="selectActivity('قراءة')">قراءة</div>
+            <div onclick="selectActivity('كتابة')">كتابة</div>
+            <div onclick="selectActivity('قراءة وكتابة')">قراءة وكتابة</div>
+        </div>
+    </div>
+
+    <!-- فلتر الأشهر -->
+    <div class="dropdown">
+        <button id="monthBtn" class="btn-select" onclick="toggleMenu('menu2', this)">
+            جميع الأشهر
+            <span class="arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </span>
+        </button>
+
+        <div id="menu2" class="dropdown-menu">
+            <div onclick="selectMonth('جميع الأشهر')">جميع الأشهر</div>
+            <div onclick="selectMonth('هذا الشهر')">هذا الشهر</div>
+            <div onclick="selectMonth('الشهر الماضي')">الشهر الماضي</div>
+            <div onclick="selectMonth('آخر 3 أشهر')">آخر 3 أشهر</div>
+        </div>
+    </div>
+</div>
+
+<!-- الجدول -->
+<div class="table-container">
+    <div class="table-header">
+        <span>الصورة</span>
+        <span>اسم الطفل</span>
+        <span>الأداء</span>
+        <span>التقدم</span>
+    </div>
+
+    <div id="tableBody">
+
+        <div class="table-row" data-activity="قراءة" data-month="هذا الشهر">
+            <img src="girl avatar.png" class="avatar" alt="افتار بنت">
+            <span>أفراح</span>
+            <span><span class="status-dot green"></span></span>
+            <span>510</span>
+        </div>
+
+        <div class="table-row" data-activity="كتابة" data-month="هذا الشهر">
+            <img src="avatar2.png" class="avatar" alt="افتار ولد">
+            <span>بدر</span>
+            <span><span class="status-dot yellow"></span></span>
+            <span>420</span>
+        </div>
+
+        <div class="table-row" data-activity="قراءة وكتابة" data-month="الشهر الماضي">
+            <img src="girl2 avatar.png" class="avatar" alt="افتار بنت">
+            <span>غادة</span>
+            <span><span class="status-dot yellow"></span></span>
+            <span>390</span>
+        </div>
+
+    </div>
+</div>
+
+<div class="bottom-btns">
+    <button class="btn pdf-btn">تحميل PDF</button>
+</div>
+</main>
+<script>
+function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+        closeDelete(); 
+    }
+});
+// فتح/إغلاق القائمة + دوران السهم
+function toggleMenu(id, btn){
+    const menu = document.getElementById(id);
+    const arrow = btn.querySelector(".arrow");
+
+    if(menu.style.display === "block"){
+        menu.style.display = "none";
+        arrow.classList.remove("rotate");
+    } else {
+        menu.style.display = "block";
+        arrow.classList.add("rotate");
+    }
+}
+
+// تغيير النشاط
+function selectActivity(text){
+    document.getElementById("activityBtn").childNodes[0].textContent = text + " ";
+    document.getElementById("menu1").style.display="none";
+    filterTable();
+}
+
+// تغيير الشهر
+function selectMonth(text){
+    document.getElementById("monthBtn").childNodes[0].textContent = text + " ";
+    document.getElementById("menu2").style.display="none";
+    filterTable();
+}
+
+// إغلاق القائمة عند الضغط خارجها
+document.addEventListener("click",function(e){
+    if(!e.target.closest(".dropdown")){
+        document.querySelectorAll(".dropdown-menu").forEach(m=>m.style.display="none");
+        document.querySelectorAll(".arrow").forEach(a=>a.classList.remove("rotate"));
+    }
+});
+
+// فلترة الجدول
+function filterTable(){
+    const activity = document.getElementById("activityBtn").innerText.trim();
+    const month = document.getElementById("monthBtn").innerText.trim();
+
+    document.querySelectorAll(".table-row").forEach(row => {
+
+        const a = row.getAttribute("data-activity");
+        const m = row.getAttribute("data-month");
+
+        const matchActivity = (activity === "جميع الأنشطة" || activity === a);
+        const matchMonth = (month === "جميع الأشهر" || month === m);
+
+        row.style.display = (matchActivity && matchMonth) ? "grid" : "none";
+    });
+}
+
+</script>
+
+</body>
+</html>

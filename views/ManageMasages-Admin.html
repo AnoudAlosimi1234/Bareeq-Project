@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الرسائل الواردة</title>
+<link rel="stylesheet" href="Admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- the MENU -->
+<div class="side-menu" id="sideMenu">
+    <a href="Home-page-Admin.html">لوحة التحكم</a>
+    <a href="UserAccountManagement-Admin.html">إدارة المستخدمين</a>
+    <a href="ViewUserProgress-Admin.html">التقارير</a>
+    <a href="manageActivity-Admin.html">الأنشطة</a>
+    <a href="ManageReward-Admin.html">إدارةالمكافآت</a>
+    <a href="ManageMasages-Admin.html">إدارةالرسائل</a>
+    <a href="editPolicy.html">تعديل السياسات</a>
+    <a href="editTerms&Condition.html">تعديل الشروط ولأحكام</a>
+    <a href="loginAdmin.html">تسجيل الخروج</a>
+</div>
+
+<div class="topbar">
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+    <div style="display:flex; align-items:center; gap:10px;">
+       <img src="admin.png" class="top-icon" alt="أيقونة المسؤول">
+    <span class="title">المسؤول</span>
+    </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<main class="page manage-messages">
+
+<h2 class="page-title">الرسائل الواردة</h2>
+
+<div class="message-card">
+    <img src="girl.png" alt="افتار بنت">
+    <div class="message-text">
+        مشاكل في تسجيل ابني<br>
+        من أم عبدالله
+    </div>
+</div>
+
+<div class="message-card">
+    <img src="boy.png" alt="افتار ولد">
+    <div class="message-text">
+        سؤال عن الأنشطة<br>
+        من أبو سعد
+    </div>
+</div>
+
+<div class="message-card">
+    <img src="girl (2).png" alt="افتار بنت">
+    <div class="message-text">
+        مشاكل في إشعارات التطبيق<br>
+        من أم أفراح
+    </div>
+</div>
+
+<div class="reply-box">
+
+    <div class="message-card">
+        <img src="girl.png" alt="افتار بنت">
+        <div class="message-text">
+            أم عبدالله<br>
+            om.abdullah1335@gmail.com<br><br>
+            هناك مشاكل في تسجيل ابني عند إنشاء حساب جديد، ما هو حل المشكلة؟
+        </div>
+    </div>
+
+    <textarea id="replyInput" placeholder="اكتب ردك هنا..."></textarea>
+
+<div class="center-btn">
+    <button class="send-btn" onclick="sendReply()">إرسال</button>
+</div>
+</div>
+
+</main>
+<script>
+    function openMenu(){
+     document.getElementById("sideMenu").style.left="0";
+    document.getElementById("overlay").style.display="block";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","true");
+}
+
+function closeMenu(){ // by clicking 
+     document.getElementById("sideMenu").style.left="-250px";
+    document.getElementById("overlay").style.display="none";
+    document.querySelector(".menu-btn").setAttribute("aria-expanded","false"); 
+}
+
+// ESC , to close menus and modals
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        closeMenu(); 
+        closeDelete(); 
+    }
+});
+function sendReply() {
+    const text = document.getElementById("replyInput").value.trim();
+
+    if (text === "") {
+        alert("الرجاء كتابة رد قبل الإرسال");
+        return;
+    }
+
+    alert("تم إرسال الرسالة:\n" + text);
+
+    // تفريغ الحقل بعد الإرسال
+    document.getElementById("replyInput").value = "";
+}
+</script>
+</body>
+</html>

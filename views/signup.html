@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - بريق</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body class="page page-signup">
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="site-logo2">
+            <img src="assets/images/logo2.png" alt="شعار التطبيق">
+        </div>
+    </header>
+
+    <!-- Signup Form Section -->
+    <section class="page-content form-section">
+
+        <form id="signupForm" class="form-container form-signup">
+
+            <div class="form-group">
+                <label class="form-label">الاسم</label>
+                <input type="text" id="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">كلمة المرور</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-signup">إنشاء حساب</button>
+
+            <p id="error-message" class="error-message"></p>
+
+        </form>
+
+        <p class="page-footer-text">هل أنت مستعد لبدء رحلة التعلم الممتعة؟</p>
+
+        <!-- Character Illustration -->
+        <div class="illustration-character">
+            <img src="assets/images/character1.png" alt="طفل">
+        </div>
+
+    </section>
+
+    <!-- Script -->
+    <script>
+      document.getElementById("signupForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMessage = document.getElementById("error-message");
+
+    if(name && email && password){
+        errorMessage.textContent = "";
+
+        const message = "مرحباً " + name + "! تم إنشاء حسابك بنجاح."; // استخدم + بدل backticks
+        const utterance = new SpeechSynthesisUtterance(message);
+        utterance.lang = "ar-SA";
+        utterance.rate = 0.9;
+        utterance.pitch = 1.1;
+
+        // ناطق الكلام
+        speechSynthesis.speak(utterance);
+
+        // نعرض alert بعد قليل عشان ما يصطدم مع الناطق
+        setTimeout(() => {
+            alert(message);
+            window.location.href = "home.html";
+        }, 500);
+
+    } else {
+        errorMessage.textContent = "يرجى ملء جميع الحقول";
+    }
+});
+
+
+    </script>
+
+</body>
+</html>

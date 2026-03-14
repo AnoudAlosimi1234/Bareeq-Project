@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول - بريق (أدمن)</title>
+<link rel="stylesheet" href="assets/css/Admin.css">
+</head>
+<body>
+    <div class="page admin-page">
+
+        <div class="admin-card">
+            <img src="assets/images/logo2.png" class="admin-logo-img">
+      
+            <h2 class="admin-title">تسجيل الدخول</h2>
+      
+            <form class="admin-login-form">
+                <input type="email" placeholder="البريد الإلكتروني">
+                <input type="password" placeholder="كلمة المرور">
+                <a href="reset-password.html" class="admin-forgot">
+                    نسيت كلمة المرور؟
+                </a>
+      
+                <button type="submit" class="admin-login-btn">
+                    تسجيل
+                </button>
+            </form>
+        </div>
+      
+      </div>
+
+<script>
+document.getElementById("adminLoginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const email = document.getElementById("adminEmail").value.trim();
+    const password = document.getElementById("adminPassword").value.trim();
+
+    if(email && password){
+        alert("مرحباً 👋 تم تسجيل دخول الأدمن بنجاح");
+        window.location.href = "admin-dashboard.html";
+    } else {
+        alert("يرجى إدخال البريد الإلكتروني وكلمة المرور");
+    }
+});
+</script>
+
+</body>
+</html>

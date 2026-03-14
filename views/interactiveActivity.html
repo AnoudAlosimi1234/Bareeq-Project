@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التمارين التفاعلية</title>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+<div class="interactive-activity">
+
+<h1>التمارين التفاعلية</h1>
+<h2>اربط العناصر معاً</h2>
+
+<div class="match-container">
+
+<svg id="lines"></svg>
+
+<button class="match-item" data-name="teeth">
+ <img src="assets/images/tooth.png" alt="سن">
+</button>
+
+<button class="match-item" data-name="fish">
+ <img src="assets/images/fish.png" alt="سمكة">
+</button>
+
+<button class="match-item" data-name="brush">
+ <img src="assets/images/toothbrush.png" alt="فرشاة">
+</button>
+
+<button class="match-item" data-name="sea">
+ <img src="assets/images/sea.jpg" alt="بحر">
+</button>
+
+</div>
+
+<div class="result" id="result"></div>
+<button class="retry-btn" id="retryBtn">حاول من جديد</button>
+
+<div class="boy">
+ <img src="assets/images/A boy-writing3.png" alt="طفل">
+</div>
+
+<img src="assets/images/A book.png" class="book" alt="كتاب">
+
+</div>
+
+<script>
+const activity = document.querySelector('.interactive-activity');
+let selected = null;
+let matches = [];
+
+const correctPairs = [
+    ["fish","sea"],
+    ["teeth","brush"]
+];
+
+const container = activity.querySelector(".match-container");
+const svg = activity.querySelector("#lines");
+const result = activity.querySelector("#result");
+const retryBtn = activity.querySelector("#retryBtn");
+
+activity.querySelectorAll(".match-item").forEach(item=>{
+    item.addEventListener("click", ()=> handleSelect(item));
+});
+
+function handleSelect(item){
+    if(!selected){
+        selected = item;
+        item.style.background="#FFE888";
+    } else {
+        if(selected !== item){
+            drawLine(selected,item);
+            matches.push([selected.dataset.name, item.dataset.name]);
+        }
+        selected.style.background="white";
+        selected = null;
+
+        if(matches.length === 2){
+            checkResult();
+        }
+    }
+}
+
+function drawLine(el1, el2){
+    const rect1 = el1.getBoundingClientRect();
+    const rect2 = el2.getBoundingClientRect();
+    const parentRect = container.getBoundingClientRect();
+
+    const x1 = rect1.left - parentRect.left + rect1.width/2;
+    const y1 = rect1.top - parentRect.top + rect1.height/2;
+
+    const x2 = rect2.left - parentRect.left + rect2.width/2;
+    const y2 = rect2.top - parentRect.top + rect2.height/2;
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1",x1);
+    line.setAttribute("y1",y1);
+    line.setAttribute("x2",x2);
+    line.setAttribute("y2",y2);
+    line.setAttribute("stroke","#2E3A63");
+    line.setAttribute("stroke-width","3");
+
+    svg.appendChild(line);
+}
+
+function checkResult(){
+    let correctCount = 0;
+
+    matches.forEach(pair=>{
+        correctPairs.forEach(correct=>{
+            if(
+                (pair[0]===correct[0] && pair[1]===correct[1]) ||
+                (pair[0]===correct[1] && pair[1]===correct[0])
+            ){
+                correctCount++;
+            }
+        });
+    });
+
+if(correctCount === 2){
+    result.textContent="أحسنت!";
+    result.className="result correct";
+
+    // حفظ نتيجة الطفل
+    localStorage.setItem("score", 100);
+
+    // انتقال تلقائي لصفحة النتيجة بعد ثانية
+    setTimeout(()=>{
+        window.location.href="activityresult.html"; // أو الهوم لو تحبين
+    },1000);
+
+} else {
+    result.textContent="حاول مجددًا";
+    result.className="result wrong";
+}
+
+    retryBtn.style.display = "inline-block";
+}
+
+retryBtn.addEventListener("click", resetGame);
+
+function resetGame(){
+    matches = [];
+    selected = null;
+    result.textContent = "";
+    result.className = "result";
+    svg.innerHTML = "";
+    retryBtn.style.display = "none";
+
+    activity.querySelectorAll(".match-item").forEach(item=>{
+        item.style.background = "white";
+    });
+}
+
+const book = activity.querySelector('.book');
+book.addEventListener('mouseenter', () => {
+    const utterance = new SpeechSynthesisUtterance("هذا كتابك لتتعلم منه التمارين التفاعلية");
+    utterance.lang = 'ar-SA';
+    speechSynthesis.speak(utterance);
+});
+</script>
+
+</body>
+</html>
